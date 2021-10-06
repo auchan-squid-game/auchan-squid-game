@@ -1,0 +1,14 @@
+name: 'Build actions'
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Install node.js dependencies'
+        run: |
+          npm install -g npm
+          npm install
+      - name: 'Build'
+        run: npm run build
+      - name: 'Lint'
+        run: npm run lint
