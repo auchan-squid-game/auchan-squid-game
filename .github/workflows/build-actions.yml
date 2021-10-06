@@ -5,9 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Install node.js dependencies'
-        run: |
-          npm install -g npm
-          npm install
+        run: npm install
       - name: 'Build'
         run: npm run build
       - name: 'Lint'
