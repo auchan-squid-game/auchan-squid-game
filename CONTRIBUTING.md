@@ -42,6 +42,14 @@ This section explains how to contribute at this project.
    4.2. The pull request title should be the issue one
 5. Once the developments are completed, select @fduquesne as reviewer
 
+```bash
+# Example to create a new branch
+$ git checkout develop
+$ git pull
+$ git checkout -b feat/12-show-enigma-popup
+$ git push -u origin feat/12-show-enigma-popup
+```
+
 ## VS Code Extentions
 
 This section lists all VS Code extentions that will help you to contribute at this project :
