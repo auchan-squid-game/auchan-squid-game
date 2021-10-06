@@ -60,3 +60,7 @@ This section lists all VS Code extentions that will help you to contribute at th
 | octref.vetur | Vetur | ✅ | Enable color syntax highlighting on Vue.js files. |
 | pkief.material-icon-theme | Material Icon Theme | ❌ | VS Code Explorer icons pack. |
 | xmorse.dark-theme-github | Dark Github Theme | ❌ | VS Code dark theme. |
+
+## Useful external links
+
+- [tabler-icons.io](https://tabler-icons.io/) : All icons used on the application (get SVG)
