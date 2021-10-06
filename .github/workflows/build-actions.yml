@@ -4,8 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Show directory'
-        run: ls -al
+      - uses: actions/checkout@v2
       - name: 'Install node.js dependencies'
         run: npm install
       - name: 'Build'
