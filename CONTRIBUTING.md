@@ -11,6 +11,8 @@ $ git clone git@github.com:auchan-squid-game/auchan-squid-game.git
 
 # Install node.js dependencies
 $ npm install
+
+# firebase
 ```
 
 ## Command line tools
