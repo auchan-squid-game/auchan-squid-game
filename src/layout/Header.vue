@@ -1,14 +1,38 @@
 <template>
   <div id="header">
     <div id="logo">Auchan Squid Game</div>
-    <div v-if="isUserAuthenticated" id="header-menu">
-      <div class="header-menu-item selected">LE JEU</div>
-      <div class="header-menu-item">LE CLASSEMENT</div>
-      <div class="header-menu-item">NOUS CONTACTER</div>
-      <div v-if="false" class="header-menu-item">ADMINISTRATION</div>
+    <div id="header-menu">
+      <template v-if="isUserAuthenticated">
+        <div class="header-menu-item selected">LE JEU</div>
+        <div class="header-menu-item">LE CLASSEMENT</div>
+        <div class="header-menu-item">NOUS CONTACTER</div>
+        <div v-if="false" class="header-menu-item">ADMINISTRATION</div>
+      </template>
     </div>
-    <div v-if="isUserAuthenticated" id="header-actions">
-      <Button icon="logout" label="DECONNEXION" color="default" size="medium" type="classic" />
+    <div id="header-actions">
+      <template v-if="isUserAuthenticated">
+        <Button icon="logout" label="DECONNEXION" color="default" size="medium" type="classic" />
+      </template>
+      <template v-else>
+        <Button
+          v-if="isLoginPage"
+          icon="logout"
+          label="INSCRIPTION"
+          color="default"
+          size="medium"
+          type="classic"
+          @click="showSignupPage"
+        />
+        <Button
+          v-else
+          icon="logout"
+          label="CONNEXION"
+          color="default"
+          size="medium"
+          type="classic"
+          @click="showLoginPage"
+        />
+      </template>
     </div>
   </div>
 </template>
@@ -22,6 +46,17 @@
     computed: {
       isUserAuthenticated() {
         return false;
+      },
+      isLoginPage() {
+        return this.$route.path === '/login';
+      },
+    },
+    methods: {
+      showLoginPage() {
+        this.$router.push('/login');
+      },
+      showSignupPage() {
+        this.$router.push('/signup');
       },
     },
   };
