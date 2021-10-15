@@ -5,22 +5,22 @@
 
       <div id="calendar-countdown">
         <div class="coutdown-case">
-          <div class="countdown-value">15</div>
+          <div class="countdown-value">{{ nbDaysRemaining }}</div>
           <div class="countdown-label">Jours</div>
         </div>
         :
         <div class="coutdown-case">
-          <div class="countdown-value">02</div>
+          <div class="countdown-value">{{ nbHoursRemaining }}</div>
           <div class="countdown-label">Heures</div>
         </div>
         :
         <div class="coutdown-case">
-          <div class="countdown-value">48</div>
+          <div class="countdown-value">{{ nbMinutesRemaining }}</div>
           <div class="countdown-label">Minutes</div>
         </div>
         :
         <div class="coutdown-case">
-          <div class="countdown-value">59</div>
+          <div class="countdown-value">{{ nbSecondsRemaining }}</div>
           <div class="countdown-label">Secondes</div>
         </div>
         avant Noel
@@ -37,6 +37,36 @@
   export default {
     name: 'HomepageView',
     components: { Calendar },
+    data() {
+      return {
+        christmasDay: new Date('2021-12-25').getTime(),
+        nbDaysRemaining: 0,
+        nbHoursRemaining: 0,
+        nbMinutesRemaining: 0,
+        nbSecondsRemaining: 0,
+        interval: undefined,
+      };
+    },
+    methods: {
+      calculateTimeRemaining() {
+        const now = Date.now();
+        const diff = this.christmasDay - now;
+
+        if (diff < 0) clearInterval(this.interval);
+
+        this.nbDaysRemaining = Math.floor(diff / (1000 * 60 * 60 * 24));
+        this.nbHoursRemaining = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        this.nbMinutesRemaining = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        this.nbSecondsRemaining = Math.floor((diff % (1000 * 60)) / 1000);
+      },
+    },
+    mounted() {
+      this.calculateTimeRemaining();
+      this.interval = setInterval(this.calculateTimeRemaining, 1000);
+    },
+    beforeUnmount() {
+      if (this.interval) clearInterval(this.interval);
+    },
   };
 </script>
 
