@@ -40,7 +40,6 @@
       this.acc = new Vector();
       this.radius = Math.floor(Math.random() * 6) + 4;
       this.angle = Math.floor(Math.random() * Math.PI * 2);
-      this.xOffset = 0;
 
       this.snowflakeElement = document.createElement('div');
       this.snowflakeElement.style.position = 'absolute';
@@ -58,12 +57,9 @@
 
     update() {
       this.vel.add(this.acc);
-      this.vel.limit(this.radius);
+      this.vel.limit(this.radius / 2);
       this.pos.add(this.vel);
       this.acc.mult(0);
-
-      this.xOffset = Math.sin(this.angle) * this.radius;
-      this.pos.x = this.pos.x + this.xOffset;
 
       if (this.pos.y > window.innerHeight + this.radius) this.randomize();
       if (this.pos.x < -this.radius) this.pos.x = window.innerWidth + this.radius;
@@ -90,7 +86,7 @@
   export default {
     name: 'Snowflakes',
     mounted() {
-      const gravity = new Vector(0, 0.98);
+      const gravity = new Vector(0, 0.02);
 
       let snow = [...Array(300).keys()].map(() => {
         const x = Math.floor(Math.random() * window.innerWidth);
@@ -101,9 +97,8 @@
       let zOffset = 0;
 
       setInterval(() => {
-        zOffset += 0.1;
-
         snow.forEach(snowflake => {
+          zOffset += 0.01;
           const wAngle = perlin1D(zOffset) * Math.PI * 2;
           const wind = new Vector(wAngle);
           wind.mult(0.01);
