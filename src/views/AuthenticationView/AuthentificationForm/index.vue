@@ -1,15 +1,20 @@
 <template>
   <div class="auth-form">
-    <!-- <Button label="Créer son compte" size="big" type="dots" /> -->
+    <slot />
+    <Button :label="submitLabel" color="christmas" size="big" @click="submit" />
   </div>
 </template>
 
 <script>
-  // import { Button } from '@/components';
+  import { Button } from '@/components';
 
   export default {
     name: 'AuthentificationForm',
-    // components: { Button },
+    components: { Button },
+    props: {
+      submit: { type: Function, required: true },
+      submitLabel: { type: String, required: true },
+    },
   };
 </script>
 

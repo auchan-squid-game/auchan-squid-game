@@ -1,13 +1,13 @@
 <template>
   <div id="header">
     <div id="logo">Auchan Squid Game</div>
-    <div id="header-menu">
+    <div v-if="isUserAuthenticated" id="header-menu">
       <div class="header-menu-item selected">LE JEU</div>
       <div class="header-menu-item">LE CLASSEMENT</div>
       <div class="header-menu-item">NOUS CONTACTER</div>
       <div v-if="false" class="header-menu-item">ADMINISTRATION</div>
     </div>
-    <div id="header-actions">
+    <div v-if="isUserAuthenticated" id="header-actions">
       <Button icon="logout" label="DECONNEXION" color="default" size="medium" type="classic" />
     </div>
   </div>
@@ -19,6 +19,11 @@
   export default {
     name: 'Header',
     components: { Button },
+    computed: {
+      isUserAuthenticated() {
+        return false;
+      },
+    },
   };
 </script>
 
@@ -30,6 +35,7 @@
     width: 100%;
     height: 120px;
     padding: 0 50px;
+    z-index: 100;
 
     #logo {
       display: flex;

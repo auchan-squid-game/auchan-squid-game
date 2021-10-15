@@ -1,7 +1,7 @@
 <template>
   <div id="root">
     <Snowflakes />
-    <Header v-if="isUserAuthenticated" />
+    <Header />
     <router-view />
   </div>
 </template>
@@ -13,11 +13,6 @@
   export default {
     name: 'App',
     components: { Header, Snowflakes },
-    computed: {
-      isUserAuthenticated() {
-        return false;
-      },
-    },
   };
 </script>
 
