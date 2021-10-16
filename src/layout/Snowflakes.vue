@@ -88,7 +88,7 @@
     mounted() {
       const gravity = new Vector(0, 0.02);
 
-      let snow = [...Array(300).keys()].map(() => {
+      const snow = [...Array(Math.round(window.innerWidth / 10)).keys()].map(() => {
         const x = Math.floor(Math.random() * window.innerWidth);
         const y = Math.floor(Math.random() * (window.innerHeight + 150));
         return new Snowflake(x, y);
