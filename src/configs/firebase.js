@@ -1,15 +1,14 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
-require('dotenv').config({ debug: process.env.DEBUG });
 
 const firebaseConfig = {
-  apiKey: process.env.VUE_APP_API_KEY,
-  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
-  databaseURL: process.env.VUE_APP_DATABASE_URL,
-  projectId: process.env.VUE_APP_PROJECT_ID,
-  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
-  appId: process.env.VUE_APP_APP_ID,
+  apiKey: 'AIzaSyCn0jdkv7fhZzN7jB6vzOejCwm9V2rlWDs',
+  authDomain: 'auchansquidgame.firebaseapp.com',
+  databaseURL: 'https://auchansquidgame-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'auchansquidgame',
+  storageBucket: 'auchansquidgame.appspot.com',
+  messagingSenderId: '377290913124',
+  appId: '1:377290913124:web:b74901a6bb7d460101f671',
 };
 
 const app = initializeApp(firebaseConfig);
