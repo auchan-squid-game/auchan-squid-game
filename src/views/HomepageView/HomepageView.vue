@@ -8,7 +8,4 @@
   };
 </script>
 
-<style lang="scss" scoped>
-  #homepage {
-  }
-</style>
+<style lang="scss" scoped></style>
