@@ -13,6 +13,11 @@ $ git clone git@github.com:auchan-squid-game/auchan-squid-game.git
 $ npm install
 ```
 
+### firebase
+
+The project works with a real time database set in firebase.  
+Ask the code owner in the project to give you the link and to grant you access.
+
 ## Command line tools
 
 This section explains all available commands to develop.
@@ -32,14 +37,14 @@ This section explains how to contribute at this project.
 
 1. Assign an issue to yourself
 2. Create a new branch from develop
-   2.1. The branche name must being with the issue type : `feat/*`, `fix/*`, `chore/*`
-   2.1. Then the branch name must show with the issue ID
-   2.2. Finally the branch name must have an explicit name depending on feature/fix to develop (each words must be separated by `-` character)
+   2.1. The branche name must being with the issue type : `feat/*`, `fix/*`, `chore/*`  
+   2.1. Then the branch name must show with the issue ID  
+   2.2. Finally the branch name must have an explicit name depending on feature/fix to develop (each words must be separated by `-` character)  
    2.3. Example : The issue **12** is a feature to show a popup to users, the branch name could be : `feat/12-show-enigma-popup`
 3. Push the new branch to the remote
-4. Create a pull request
-   4.1. Create a pull request from your branch with `develop` branch as target
-   4.2. The pull request title should be the issue one
+4. Create a pull request  
+   4.1. Create a pull request from your branch with `develop` branch as target  
+   4.2. The pull request title should be the issue's one
 5. Once the developments are completed, select @fduquesne as reviewer
 
 ```bash
