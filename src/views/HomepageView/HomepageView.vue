@@ -4,6 +4,8 @@
 
 <script>
   export default {
-    name: 'Homepage',
+    name: 'HomepageView',
   };
 </script>
+
+<style lang="scss" scoped></style>

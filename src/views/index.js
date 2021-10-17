@@ -1,3 +1,4 @@
-import Homepage from './Homepage/Homepage';
+import HomepageView from './HomepageView/HomepageView';
+import AuthenticationView from './AuthenticationView/AuthenticationView';
 
-export { Homepage };
+export { HomepageView, AuthenticationView };
