@@ -34,7 +34,6 @@
         // TODO: Check data entered by user
         // TODO: Call actions to create a user account
         // TODO: Call actions to authenticate user
-
         // Redirect user to the homepage
         this.$router.push('/');
       },
