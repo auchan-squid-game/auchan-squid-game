@@ -3,10 +3,18 @@
     <div id="logo">Auchan Squid Game</div>
     <div id="header-menu">
       <template v-if="isUserAuthenticated">
-        <div class="header-menu-item selected">LE JEU</div>
-        <div class="header-menu-item">LE CLASSEMENT</div>
-        <div class="header-menu-item">NOUS CONTACTER</div>
-        <div v-if="false" class="header-menu-item">ADMINISTRATION</div>
+        <router-link to="/">
+          <div :class="['header-menu-item', { selected: $route.path === '/' }]">LE JEU</div>
+        </router-link>
+        <router-link to="/ranking">
+          <div :class="['header-menu-item', { selected: $route.path === '/ranking' }]">LE CLASSEMENT</div>
+        </router-link>
+        <router-link to="/contact-us">
+          <div :class="['header-menu-item', { selected: $route.path === '/contact-us' }]">NOUS CONTACTER</div>
+        </router-link>
+        <router-link to="/admin">
+          <div :class="['header-menu-item', { selected: $route.path === '/admin' }]">ADMINISTRATION</div>
+        </router-link>
       </template>
     </div>
     <div id="header-actions">
@@ -45,7 +53,7 @@
     components: { Button },
     computed: {
       isUserAuthenticated() {
-        return false;
+        return true;
       },
       isLoginPage() {
         return this.$route.path === '/login';
@@ -84,27 +92,33 @@
       flex: 1;
       padding: 0 40px;
 
-      .header-menu-item {
+      a {
         display: flex;
-        align-items: center;
-        padding: 0 20px;
-        color: $color-white-dark;
-        font-size: 15px;
-        cursor: pointer;
+        color: inherit;
+        text-decoration: inherit;
 
-        &.selected {
-          position: relative;
-          color: $color-white;
+        .header-menu-item {
+          display: flex;
+          align-items: center;
+          padding: 0 20px;
+          color: $color-white-dark;
+          font-size: 15px;
+          cursor: pointer;
 
-          &::after {
-            content: '';
-            position: absolute;
-            top: 75px;
-            left: calc(50%);
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: $color-christmas-red;
+          &.selected {
+            position: relative;
+            color: $color-white;
+
+            &::after {
+              content: '';
+              position: absolute;
+              top: 75px;
+              left: calc(50%);
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+              background: $color-christmas-red;
+            }
           }
         }
       }
