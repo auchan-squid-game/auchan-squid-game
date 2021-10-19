@@ -1,1 +1,5 @@
-export default {};
+export default {
+  uploadUser: (state, payload) => {
+    state.user = payload;
+  },
+};

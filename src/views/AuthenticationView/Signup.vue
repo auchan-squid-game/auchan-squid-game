@@ -15,7 +15,7 @@
 
 <script>
   import { Input } from '@/components';
-
+  import { mapActions } from 'vuex';
   import AuthentificationForm from './AuthentificationForm';
 
   export default {
@@ -30,7 +30,14 @@
       };
     },
     methods: {
-      createUserAccount() {
+      ...mapActions({ registerNewUser: 'registerNewUser' }),
+      createUserAccount(submitEvent) {
+        console.log(submitEvent);
+        const test = {
+          username: this.username,
+          password: this.password,
+        };
+        this.registerNewUser(test);
         // TODO: Check data entered by user
         // TODO: Call actions to create a user account
         // TODO: Call actions to authenticate user
