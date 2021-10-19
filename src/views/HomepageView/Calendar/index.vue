@@ -33,6 +33,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @use 'sass:math';
   @import '@/assets/scss/_colors.scss';
 
   #calendar-container {
@@ -235,7 +236,7 @@
         background-image: radial-gradient($color-christmas-yellow-dark 12%, transparent 0),
           radial-gradient($color-christmas-yellow-dark 12%, transparent 0);
         background-size: 20px 20px;
-        background-position: 0 0, (20px / 2) (20px / 2);
+        background-position: 0 0, math.div(20px, 2) math.div(20px, 2);
         color: $color-white;
       }
 
@@ -245,7 +246,7 @@
         background-image: radial-gradient($color-background-very-light 12%, transparent 0),
           radial-gradient($color-background-very-light 12%, transparent 0);
         background-size: 20px 20px;
-        background-position: 0 0, (20px / 2) (20px / 2);
+        background-position: 0 0, math.div(20px, 2) math.div(20px, 2);
         color: $color-white;
       }
 
@@ -281,7 +282,7 @@
           background-image: radial-gradient($color-christmas-red-dark 12%, transparent 0),
             radial-gradient($color-christmas-red-dark 12%, transparent 0);
           background-size: 20px 20px;
-          background-position: 0 0, (20px / 2) (20px / 2);
+          background-position: 0 0, math.div(20px, 2) math.div(20px, 2);
           color: $color-white;
         }
       }
