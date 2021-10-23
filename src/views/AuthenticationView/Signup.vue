@@ -31,8 +31,7 @@
     },
     methods: {
       ...mapActions({ registerNewUser: 'registerNewUser' }),
-      createUserAccount(submitEvent) {
-        console.log(submitEvent);
+      createUserAccount() {
         const test = {
           username: this.username,
           password: this.password,
