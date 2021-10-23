@@ -1,7 +1,7 @@
 <template>
   <AuthentificationForm title="Inscription" submitLabel="Créer son compte" :submit="createUserAccount">
     <Input type="text" label="Code projet" size="big" @update="projectCode = $event" />
-    <Input type="text" label="Nom utilisateur" placeholder="Père noël" size="big" @update="username = $event" />
+    <Input type="email" label="email" placeholder="perenoel@auchan.fr" size="big" @update="username = $event" />
     <Input type="password" label="Mot de passe" placeholder="••••••••••••" size="big" @update="password = $event" />
     <Input
       type="password"

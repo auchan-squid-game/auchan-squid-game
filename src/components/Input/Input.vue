@@ -15,7 +15,7 @@
       label: { type: String },
       placeholder: { type: String },
       size: { type: String, default: 'medium', validator: val => ['big', 'medium', 'small'].includes(val) },
-      type: { type: String, default: 'text', validator: val => ['text', 'password'].includes(val) },
+      type: { type: String, default: 'text', validator: val => ['text', 'password', 'email'].includes(val) },
       value: { type: String },
     },
   };
