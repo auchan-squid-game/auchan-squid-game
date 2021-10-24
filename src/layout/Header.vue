@@ -11,7 +11,7 @@
     </div>
     <div id="header-actions">
       <template v-if="isUserAuthenticated">
-        <Button icon="logout" label="DECONNEXION" color="default" size="medium" type="classic" />
+        <Button icon="logout" label="DECONNEXION" color="default" size="medium" type="classic" @click="logout" />
       </template>
       <template v-else>
         <Button
@@ -45,7 +45,7 @@
     components: { Button },
     computed: {
       isUserAuthenticated() {
-        return false;
+        return this.$store.getters.isUserAuthenticated;
       },
       isLoginPage() {
         return this.$route.path === '/login';
@@ -57,6 +57,9 @@
       },
       showSignupPage() {
         this.$router.push('/signup');
+      },
+      logout() {
+        this.$store.dispatch('logout');
       },
     },
   };

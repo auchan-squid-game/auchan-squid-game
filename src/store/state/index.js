@@ -1,1 +1,6 @@
-export default {};
+export default {
+  user: undefined,
+  app: {
+    isLoaded: false,
+  },
+};

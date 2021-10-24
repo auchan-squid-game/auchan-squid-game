@@ -1,5 +1,5 @@
 <template>
-  <div id="root">
+  <div v-if="isAppLoaded" id="root">
     <Snowflakes />
     <Header />
     <router-view />
@@ -13,6 +13,15 @@
   export default {
     name: 'App',
     components: { Header, Snowflakes },
+    computed: {
+      isAppLoaded() {
+        console.log(this.$store.getters.isAppLoaded);
+        return this.$store.getters.isAppLoaded;
+      },
+    },
+    beforeMount() {
+      this.$store.dispatch('syncActions');
+    },
   };
 </script>
 

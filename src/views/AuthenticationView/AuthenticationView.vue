@@ -1,17 +1,21 @@
 <template>
-  <div id="auth-page">
-    <Login v-if="showLoginView" />
-    <Signup v-else />
-  </div>
+  <DefaultView noUserAuthenticated>
+    <div id="auth-page">
+      <Login v-if="showLoginView" />
+      <Signup v-else />
+    </div>
+  </DefaultView>
 </template>
 
 <script>
+  import { DefaultView } from '@/views';
+
   import Login from './Login';
   import Signup from './Signup';
 
   export default {
     name: 'AuthenticationView',
-    components: { Login, Signup },
+    components: { DefaultView, Login, Signup },
     computed: {
       showLoginView() {
         return this.$route.path === '/login';

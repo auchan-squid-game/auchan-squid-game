@@ -1,42 +1,46 @@
 <template>
-  <div id="homepage">
-    <div id="calendar-header">
-      <div id="calendar-title">Calendrier de l'avent</div>
+  <DefaultView>
+    <div id="homepage">
+      <div id="calendar-header">
+        <div id="calendar-title">Calendrier de l'avent</div>
 
-      <div id="calendar-countdown">
-        <div class="coutdown-case">
-          <div class="countdown-value">{{ nbDaysRemaining }}</div>
-          <div class="countdown-label">Jours</div>
+        <div id="calendar-countdown">
+          <div class="coutdown-case">
+            <div class="countdown-value">{{ nbDaysRemaining }}</div>
+            <div class="countdown-label">Jours</div>
+          </div>
+          :
+          <div class="coutdown-case">
+            <div class="countdown-value">{{ nbHoursRemaining }}</div>
+            <div class="countdown-label">Heures</div>
+          </div>
+          :
+          <div class="coutdown-case">
+            <div class="countdown-value">{{ nbMinutesRemaining }}</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          :
+          <div class="coutdown-case">
+            <div class="countdown-value">{{ nbSecondsRemaining }}</div>
+            <div class="countdown-label">Secondes</div>
+          </div>
+          avant Noel
         </div>
-        :
-        <div class="coutdown-case">
-          <div class="countdown-value">{{ nbHoursRemaining }}</div>
-          <div class="countdown-label">Heures</div>
-        </div>
-        :
-        <div class="coutdown-case">
-          <div class="countdown-value">{{ nbMinutesRemaining }}</div>
-          <div class="countdown-label">Minutes</div>
-        </div>
-        :
-        <div class="coutdown-case">
-          <div class="countdown-value">{{ nbSecondsRemaining }}</div>
-          <div class="countdown-label">Secondes</div>
-        </div>
-        avant Noel
       </div>
-    </div>
 
-    <Calendar />
-  </div>
+      <Calendar />
+    </div>
+  </DefaultView>
 </template>
 
 <script>
+  import { DefaultView } from '@/views';
+
   import Calendar from './Calendar';
 
   export default {
     name: 'HomepageView',
-    components: { Calendar },
+    components: { DefaultView, Calendar },
     data() {
       return {
         christmasDay: new Date('2021-12-25').getTime(),
