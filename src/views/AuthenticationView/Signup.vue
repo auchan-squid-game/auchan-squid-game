@@ -32,11 +32,11 @@
     methods: {
       ...mapActions({ registerNewUser: 'registerNewUser' }),
       createUserAccount() {
-        const test = {
-          username: this.username,
+        const userSignUpInfos = {
+          email: this.username,
           password: this.password,
         };
-        this.registerNewUser(test);
+        this.registerNewUser(userSignUpInfos);
         // TODO: Check data entered by user
         // TODO: Call actions to create a user account
         // TODO: Call actions to authenticate user

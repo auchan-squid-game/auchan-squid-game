@@ -1,21 +1,21 @@
-import database from '../../configs/firebase';
-import { ref, set } from 'firebase/database';
+import authentificationService from '@/services/authentification.js';
+import databaseServices from '@/services/database.js';
 
 export default {
-  registerNewUser: ({ commit }, payload) => {
-    const id = Math.floor(new Date().getTime() / 1000);
-    const user = {
-      pseudo: payload.username,
-      id: id,
-      password: payload.password,
-      role: 'admin',
-      totalPoints: 0,
-      accumulationNumber: 0,
-      answers: {},
-    };
-    set(ref(database, `users/${id}`), {
-      user,
-    });
-    commit('uploadUser', user);
+  registerNewUser: (commit, payload) => {
+    authentificationService
+      .createNewUser(payload)
+      .then(userCredential => {
+        console.log(userCredential);
+        const user = authentificationService.getNewUserTemplate(userCredential);
+        if (user) databaseServices.writeUserData(user);
+        console.log(user);
+        //Save user into DB with UID
+        //Commit user into store
+      })
+      .catch(error => {
+        console.log(error);
+        //commit error to store
+      });
   },
 };
