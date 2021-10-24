@@ -20,18 +20,9 @@
           label="INSCRIPTION"
           color="default"
           size="medium"
-          type="classic"
-          @click="showSignupPage"
+          @click="$router.push('/signup')"
         />
-        <Button
-          v-else
-          icon="logout"
-          label="CONNEXION"
-          color="default"
-          size="medium"
-          type="classic"
-          @click="showLoginPage"
-        />
+        <Button v-else icon="logout" label="CONNEXION" color="default" size="medium" @click="$router.push('/login')" />
       </template>
     </div>
   </div>
@@ -49,14 +40,6 @@
       },
       isLoginPage() {
         return this.$route.path === '/login';
-      },
-    },
-    methods: {
-      showLoginPage() {
-        this.$router.push('/login');
-      },
-      showSignupPage() {
-        this.$router.push('/signup');
       },
     },
   };
