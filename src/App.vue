@@ -15,7 +15,6 @@
     components: { Header, Snowflakes },
     computed: {
       isAppLoaded() {
-        console.log(this.$store.getters.isAppLoaded);
         return this.$store.getters.isAppLoaded;
       },
     },
