@@ -1,5 +1,5 @@
 <template>
-  <div class="auth-form">
+  <div class="auth-form" @keyup.enter="submit">
     <div class="title">{{ title }}</div>
     <slot />
     <Button :label="submitLabel" color="christmas" size="big" @click="submit" />
