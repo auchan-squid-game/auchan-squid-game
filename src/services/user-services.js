@@ -1,7 +1,6 @@
 import { createUserWithEmailAndPassword, getAuth, signOut } from 'firebase/auth';
 import { get, ref, set } from 'firebase/database';
 
-// eslint-disable-next-line
 import db from '@/config/firebase';
 
 export default {
