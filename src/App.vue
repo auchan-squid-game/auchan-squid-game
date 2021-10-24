@@ -1,18 +1,16 @@
 <template>
   <div v-if="isAppLoaded" id="root">
     <Snowflakes />
-    <Header />
     <router-view />
   </div>
 </template>
 
 <script>
-  import Header from '@/layout/Header';
   import Snowflakes from '@/layout/Snowflakes';
 
   export default {
     name: 'App',
-    components: { Header, Snowflakes },
+    components: { Snowflakes },
     computed: {
       isAppLoaded() {
         return this.$store.state.app.isLoaded;
