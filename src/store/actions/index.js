@@ -21,8 +21,56 @@ export default {
       }
     });
   },
-  createUserAccount({ commit }, user) {
-    userServices.signup(user).then(user => commit(types.SET_USER, user));
+  createUserAccount({ commit, state }, user) {
+    commit(types.IS_SIGNUP_PROCESSING, true);
+    commit(types.RESET_SIGNUP_ERRORS);
+
+    // Manage entered data
+    if (user.projectCode !== 'ARF') {
+      commit(types.SET_SIGNUP_ERROR, { input: 'projectCode', message: 'Code project incorrect' });
+    }
+    if (user.username.length < 8) {
+      commit(types.SET_SIGNUP_ERROR, {
+        input: 'username',
+        message: 'Le nom utilisateur doit contenir au moins 8 caracteres',
+      });
+    }
+    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) {
+      commit(types.SET_SIGNUP_ERROR, { input: 'email', message: 'Adresse mail invalide' });
+    }
+    if (user.password !== user.confirmPassword) {
+      commit(types.SET_SIGNUP_ERROR, { input: 'password', message: 'Confirmation du mot de passe incorrecte' });
+    }
+    if (user.password.length < 8) {
+      commit(types.SET_SIGNUP_ERROR, {
+        input: 'password',
+        message: 'Le mot de passe doit contenir au moins 8 caracteres',
+      });
+    }
+
+    // Signup user (if no previous error)
+    const errors = state.errors.signup;
+    if (!errors.projectCode && !errors.username && !errors.email && !errors.password) {
+      userServices
+        .signup(user)
+        .then(user => commit(types.SET_USER, user))
+        .catch(err => {
+          if (err.code === 'auth/email-already-in-use') {
+            commit(types.SET_SIGNUP_ERROR, { input: 'email', message: 'Adresse mail deja utilisee' });
+          }
+          if (err.code === 'auth/invalid-email') {
+            commit(types.SET_SIGNUP_ERROR, { input: 'email', message: 'Adresse mail invalide' });
+          }
+          if (err.code === 'auth/weak-password') {
+            commit(types.SET_SIGNUP_ERROR, { input: 'password', message: 'Mot de passe pas trop faible' });
+          }
+        })
+        .finally(() => {
+          commit(types.IS_SIGNUP_PROCESSING, false);
+        });
+    } else {
+      commit(types.IS_SIGNUP_PROCESSING, false);
+    }
   },
   logout({ commit }) {
     userServices.logout().then(() => commit(types.LOGOUT));

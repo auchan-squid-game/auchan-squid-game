@@ -1,7 +1,13 @@
 <template>
   <div :class="['btn', color, size, { both: !!icon && !!label }]">
-    <Icon v-if="!!icon" :name="icon" />
-    <div v-if="!!label" class="btn-label">{{ label }}</div>
+    <template v-if="!loading">
+      <Icon v-if="!!icon" :name="icon" />
+      <div v-if="!!label" class="btn-label">{{ label }}</div>
+    </template>
+
+    <template v-else>
+      <Icon class="loader" name="loader" />
+    </template>
   </div>
 </template>
 
@@ -19,6 +25,7 @@
         default: 'christmas',
         validator: color => ['christmas', 'default'].includes(color),
       },
+      loading: { type: Boolean },
       size: {
         type: String,
         default: 'medium',
@@ -31,6 +38,16 @@
 <style lang="scss" scoped>
   @import '@/assets/scss/_colors.scss';
 
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
   .btn {
     display: flex;
     align-items: center;
@@ -40,6 +57,10 @@
       display: flex;
       justify-content: center;
       flex: 1;
+    }
+
+    .loader {
+      animation: rotate linear 3s infinite;
     }
 
     &.medium {
@@ -62,6 +83,10 @@
       height: 80px;
       border-radius: 10px;
       font-size: 35px;
+
+      .loader {
+        padding: 20px;
+      }
     }
 
     &.christmas {
