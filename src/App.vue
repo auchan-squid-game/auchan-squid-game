@@ -15,7 +15,7 @@
     components: { Header, Snowflakes },
     computed: {
       isAppLoaded() {
-        return this.$store.getters.isAppLoaded;
+        return this.$store.state.app.isLoaded;
       },
     },
     beforeMount() {

@@ -8,7 +8,7 @@
     props: { noUserAuthenticated: Boolean },
     computed: {
       isUserAuthenticated() {
-        return this.$store.getters.isUserAuthenticated;
+        return !!this.$store.state.user;
       },
     },
     beforeMount() {
