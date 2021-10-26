@@ -1,0 +1,12 @@
+
+name: Discord Notifications
+on:
+    push:
+        branches: [ chore/poc-livraison-channel-discord ]
+jobs:
+    notification:
+    runs-on: ubuntu-latest
+    steps:
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_API_KEY }}
+      uses: Ilshidur/action-discord@master
