@@ -14,6 +14,16 @@
   export default {
     name: 'Page',
     components: { Header },
+    props: { shouldUserBeAuthenticated: Boolean },
+    computed: {
+      isUserAuthenticated() {
+        return !!this.$store.state.user;
+      },
+    },
+    beforeMount() {
+      if (this.shouldUserBeAuthenticated && !this.isUserAuthenticated) this.$router.push('/login');
+      if (!this.shouldUserBeAuthenticated && this.isUserAuthenticated) this.$router.push('/');
+    },
   };
 </script>
 
@@ -27,6 +37,7 @@
 
     #page-container {
       flex: 1;
+      overflow-y: auto;
     }
   }
 </style>

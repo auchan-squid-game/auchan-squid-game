@@ -1,34 +1,36 @@
 <template>
-  <div id="launch-countdown-page">
-    <h1>Les jeux commenceront dans :</h1>
+  <Page shouldUserBeAuthenticated>
+    <div id="launch-countdown-page">
+      <h1>Les jeux commenceront dans</h1>
 
-    <div id="countdown">
-      <div class="coutdown-case">
-        <div class="countdown-value">{{ nbDaysRemaining }}</div>
-        <div class="countdown-label">Jours</div>
-      </div>
-      :
-      <div class="coutdown-case">
-        <div class="countdown-value">{{ nbHoursRemaining }}</div>
-        <div class="countdown-label">Heures</div>
-      </div>
-      :
-      <div class="coutdown-case">
-        <div class="countdown-value">{{ nbMinutesRemaining }}</div>
-        <div class="countdown-label">Minutes</div>
-      </div>
-      :
-      <div class="coutdown-case">
-        <div class="countdown-value">{{ nbSecondsRemaining }}</div>
-        <div class="countdown-label">Secondes</div>
+      <div id="countdown">
+        <div class="coutdown-case">
+          <div class="countdown-value">{{ nbDaysRemaining }}</div>
+          <div class="countdown-label">Jours</div>
+        </div>
+        <div class="coutdown-case">
+          <div class="countdown-value">{{ nbHoursRemaining }}</div>
+          <div class="countdown-label">Heures</div>
+        </div>
+        <div class="coutdown-case">
+          <div class="countdown-value">{{ nbMinutesRemaining }}</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="coutdown-case">
+          <div class="countdown-value">{{ nbSecondsRemaining }}</div>
+          <div class="countdown-label">Secondes</div>
+        </div>
       </div>
     </div>
-  </div>
+  </Page>
 </template>
 
 <script>
+  import Page from '@/layout/Page';
+
   export default {
     name: 'LaunchCountdownView',
+    components: { Page },
     data() {
       return {
         christmasDay: new Date('2021-12-01').getTime(),
