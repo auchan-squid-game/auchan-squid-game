@@ -5,6 +5,7 @@ jobs:
   notification:
     runs-on: ubuntu-latest
     steps:
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_API_KEY }}
-      uses: Ilshidur/action-discord@master
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_API_KEY }}
+        uses: Ilshidur/action-discord@master
