@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth, signOut } from 'firebase/auth';
 import { get, ref, set } from 'firebase/database';
 
 import db from '@/config/firebase';
@@ -14,7 +14,10 @@ export default {
     return createUserWithEmailAndPassword(getAuth(), email, password).then(userCredentials => {
       const uid = userCredentials.user.uid;
       const user = { id: uid, username, role: 'player', totalPoints: 0, accumulation: 0 };
-      return set(ref(db, `/users/${uid}`), user).then(() => user);
+      return set(ref(db, `/users/${uid}`), user);
     });
+  },
+  signin({ email, password }) {
+    return signInWithEmailAndPassword(getAuth(), email, password);
   },
 };

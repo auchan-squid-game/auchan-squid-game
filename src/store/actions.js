@@ -9,7 +9,6 @@ export default {
     commit(types.IS_APP_LOADED, false);
 
     getAuth().onAuthStateChanged(user => {
-      console.log(user);
       if (user) {
         userServices.get(user.uid).then(userData => {
           commit(types.SET_USER, userData);
@@ -23,10 +22,15 @@ export default {
       }
     });
   },
-  sinfningUserToApplication({ commit }, user) {
+  signin({ commit, state }, user) {
     commit(types.RESET_SIGNIN_ERRORS);
     if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) {
       commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'Adresse mail invalide' });
+    }
+    // Signin user (if no previous error)
+    const errors = state.errors.signin;
+    if (!errors.mail) {
+      userServices.signin(user);
     }
   },
 
@@ -62,7 +66,6 @@ export default {
     if (!errors.projectCode && !errors.username && !errors.email && !errors.password) {
       userServices
         .signup(user)
-        .then(user => commit(types.SET_USER, user))
         .catch(err => {
           if (err.code === 'auth/email-already-in-use') {
             commit(types.SET_SIGNUP_ERROR, { input: 'email', message: 'Adresse mail deja utilisee' });

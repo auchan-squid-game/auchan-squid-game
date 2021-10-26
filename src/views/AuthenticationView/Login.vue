@@ -34,12 +34,10 @@
     },
     methods: {
       authenticate() {
-        this.$store.dispatch('sinfningUserToApplication', {
+        this.$store.dispatch('signin', {
           email: this.email,
           password: this.password,
-        }),
-          // Redirect user to the homepage
-          this.$router.push('/');
+        });
       },
     },
   };
