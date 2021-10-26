@@ -14,13 +14,4 @@ jobs:
         run: npm run build
       - name: 'Lint'
         run: npm run lint
-        
-on: [push]
-jobs:
-  notification:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Discord notification
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_API_KEY }}
-        uses: Ilshidur/action-discord@master
+

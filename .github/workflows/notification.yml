@@ -1,0 +1,10 @@
+name: Discord notification
+on: [push]
+jobs:
+  notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_API_KEY }}
+        uses: Ilshidur/action-discord@master
