@@ -1,7 +1,7 @@
 name: 'Build actions'
 on:
     push:
-        branches: [ chore/poc-livraison-channel-discord ]
+        branches: [ chore//poc-livraison-channel-discord ]
 jobs:
   build:
     runs-on: macos-latest
