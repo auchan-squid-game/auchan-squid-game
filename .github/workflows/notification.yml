@@ -1,10 +1,8 @@
 
 name: Discord Notifications
-on:
-    push:
-        branches: [ chore/poc-livraison-channel-discord ]
+on: [push]
 jobs:
-    notification:
+  notification:
     runs-on: ubuntu-latest
     steps:
       env:
