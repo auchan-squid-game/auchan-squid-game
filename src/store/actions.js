@@ -29,7 +29,7 @@ export default {
 
     // Manage entered data
     if (user.projectCode !== 'ARF') {
-      commit(types.SET_SIGNUP_ERROR, { input: 'projectCode', message: 'Code project incorrect' });
+      commit(types.SET_SIGNUP_ERROR, { input: 'projectCode', message: 'Code projet incorrect' });
     }
     if (user.username.length < 8) {
       commit(types.SET_SIGNUP_ERROR, {
