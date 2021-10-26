@@ -19,4 +19,10 @@ export default {
   [types.SET_SIGNUP_ERROR](state, { input, message }) {
     state.errors.signup[input] = message;
   },
+  [types.RESET_SIGNIN_ERRORS](state) {
+    state.errors.signin = {};
+  },
+  [types.SET_SIGNIN_ERROR](state, { input, message }) {
+    state.errors.signin[input] = message;
+  },
 };

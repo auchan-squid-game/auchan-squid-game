@@ -23,6 +23,13 @@ export default {
       }
     });
   },
+  sinfningUserToApplication({ commit }, user) {
+    commit(types.RESET_SIGNIN_ERRORS);
+    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) {
+      commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'Adresse mail invalide' });
+    }
+  },
+
   createUserAccount({ commit, state }, user) {
     commit(types.IS_SIGNUP_PROCESSING, true);
     commit(types.RESET_SIGNUP_ERRORS);

@@ -1,6 +1,14 @@
 <template>
   <AuthentificationForm title="Connexion" submitLabel="Se connecter" :submit="authenticate">
-    <Input type="text" label="Nom utilisateur" placeholder="Père noël" size="big" @update="username = $event" />
+    <Input
+      type="text"
+      label="Email"
+      placeholder="Père noël@partner.auchan.fr"
+      size="big"
+      @update="email = $event"
+      :value="email"
+      :error="emailError"
+    />
     <Input type="password" label="Mot de passe" placeholder="••••••••••••" size="big" @update="password = $event" />
   </AuthentificationForm>
 </template>
@@ -15,17 +23,23 @@
     components: { Input, AuthentificationForm },
     data() {
       return {
-        username: '',
+        email: '',
         password: '',
       };
     },
+    computed: {
+      emailError() {
+        return this.$store.state.errors.signin.email;
+      },
+    },
     methods: {
       authenticate() {
-        // TODO: Check data entered by user
-        // TODO: Call actions to authenticate user
-
-        // Redirect user to the homepage
-        this.$router.push('/');
+        this.$store.dispatch('sinfningUserToApplication', {
+          email: this.email,
+          password: this.password,
+        }),
+          // Redirect user to the homepage
+          this.$router.push('/');
       },
     },
   };
