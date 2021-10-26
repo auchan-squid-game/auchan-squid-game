@@ -1,5 +1,5 @@
 <template>
-  <Page>
+  <Page shouldUserBeAuthenticated>
     <div id="ranking-page">
       <div id="top-ranks">
         <div class="rank-container">

@@ -5,6 +5,8 @@
     <div class="input">
       <input :type="type" :placeholder="placeholder" :value="value" @input="$emit('update', $event.target.value)" />
     </div>
+
+    <div v-if="!!error" class="input-error">{{ error }}</div>
   </div>
 </template>
 
@@ -12,6 +14,7 @@
   export default {
     name: 'Input',
     props: {
+      error: { type: String },
       label: { type: String },
       placeholder: { type: String },
       size: { type: String, default: 'medium', validator: val => ['big', 'medium', 'small'].includes(val) },
@@ -28,7 +31,6 @@
     width: 100%;
 
     &.big {
-      height: 80px;
       border-radius: 10px;
 
       .input-label {
@@ -53,6 +55,10 @@
       border: none;
       background: #ffffff22;
       color: $color-white;
+    }
+
+    .input-error {
+      color: $color-christmas-red;
     }
   }
 </style>

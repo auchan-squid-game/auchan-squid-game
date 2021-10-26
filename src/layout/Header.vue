@@ -19,7 +19,7 @@
     </div>
     <div id="header-actions">
       <template v-if="isUserAuthenticated">
-        <Button icon="logout" label="DECONNEXION" color="default" size="medium" type="classic" />
+        <Button icon="logout" label="DECONNEXION" color="default" size="medium" type="classic" @click="logout" />
       </template>
       <template v-else>
         <Button
@@ -44,10 +44,21 @@
     components: { Button },
     computed: {
       isUserAuthenticated() {
-        return true;
+        return !!this.$store.state.user;
       },
       isLoginPage() {
         return this.$route.path === '/login';
+      },
+    },
+    methods: {
+      showLoginPage() {
+        this.$router.push('/login');
+      },
+      showSignupPage() {
+        this.$router.push('/signup');
+      },
+      logout() {
+        this.$store.dispatch('logout');
       },
     },
   };

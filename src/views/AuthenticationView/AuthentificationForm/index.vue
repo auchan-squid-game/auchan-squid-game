@@ -1,8 +1,8 @@
 <template>
-  <div class="auth-form">
+  <div class="auth-form" @keyup.enter="submitAction">
     <div class="title">{{ title }}</div>
     <slot />
-    <Button :label="submitLabel" color="christmas" size="big" @click="submit" />
+    <Button :label="submitLabel" color="christmas" size="big" :loading="processing" @click="submitAction" />
   </div>
 </template>
 
@@ -13,9 +13,15 @@
     name: 'AuthentificationForm',
     components: { Button },
     props: {
+      processing: { type: Boolean },
       submit: { type: Function, required: true },
       submitLabel: { type: String, required: true },
       title: { type: String, required: true },
+    },
+    methods: {
+      submitAction() {
+        if (!this.processing) this.submit();
+      },
     },
   };
 </script>

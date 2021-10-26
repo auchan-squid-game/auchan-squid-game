@@ -1,5 +1,5 @@
 <template>
-  <Page>
+  <Page shoudUserBeAuthenticated>
     <div id="homepage">
       <div id="calendar-header">
         <div id="calendar-title">Calendrier de l'avent</div>
