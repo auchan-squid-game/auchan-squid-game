@@ -14,9 +14,7 @@ jobs:
         run: npm run build
       - name: 'Lint'
         run: npm run lint
-
-
-name: 'Discord Notifications'
+        
 on: [push]
 jobs:
   notification:
