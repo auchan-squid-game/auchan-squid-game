@@ -1,7 +1,5 @@
 name: 'Build actions'
-on:
-    push:
-        branches: [ chore//poc-livraison-channel-discord ]
+on: [push]
 jobs:
   build:
     runs-on: macos-latest
@@ -16,3 +14,15 @@ jobs:
         run: npm run build
       - name: 'Lint'
         run: npm run lint
+
+
+name: 'Discord Notifications'
+on: [push]
+jobs:
+  notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_API_KEY }}
+        uses: Ilshidur/action-discord@master
