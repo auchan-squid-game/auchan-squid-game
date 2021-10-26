@@ -23,6 +23,6 @@ jobs:
     notification:
     runs-on: ubuntu-latest
     steps:
-       env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_API_KEY }}
-        uses: Ilshidur/action-discord@master
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_API_KEY }}
+      uses: Ilshidur/action-discord@master
