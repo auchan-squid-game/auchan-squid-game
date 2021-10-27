@@ -1,8 +1,8 @@
 export default {
   user: undefined,
   errors: {
-    signup: {},
     signin: {},
+    signup: {},
   },
   app: {
     isLoaded: false,

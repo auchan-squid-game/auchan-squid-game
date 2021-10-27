@@ -1,5 +1,5 @@
 <template>
-  <AuthentificationForm title="Connexion" submitLabel="Se connecter" :submit="authenticate">
+  <AuthentificationForm title="Connexion" submitLabel="Se connecter" :submit="signin">
     <Input
       type="text"
       label="Email"
@@ -33,7 +33,7 @@
       },
     },
     methods: {
-      authenticate() {
+      signin() {
         this.$store.dispatch('signin', {
           email: this.email,
           password: this.password,

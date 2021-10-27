@@ -5,6 +5,10 @@ import router from '@/router';
 import userServices from '@/services/user-services';
 
 export default {
+  /**
+   * Add listener on authenticate state changes.
+   * If the user is authenticated, he is redirect to the homepage, to the login page otherwise
+   */
   syncActions({ commit }) {
     commit(types.IS_APP_LOADED, false);
 
@@ -22,11 +26,22 @@ export default {
       }
     });
   },
+
+  /**
+   * Signing the user with data entered :
+   * - Check if the user email is valid
+   * - If all previous checks are OK, try to signin the user
+   *
+   * @param {Object} user - user entered in the login form
+   */
   signin({ commit, state }, user) {
     commit(types.RESET_SIGNIN_ERRORS);
+
+    // Manage entered data
     if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) {
       commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'Adresse mail invalide' });
     }
+
     // Signin user (if no previous error)
     const errors = state.errors.signin;
     if (!errors.mail) {
@@ -34,6 +49,17 @@ export default {
     }
   },
 
+  /**
+   * Signup the user with data entered :
+   * - Check if the project code is correct
+   * - Check the username length
+   * - Check if the user email is valid
+   * - Check if the password and the confirm password fileds have the same value
+   * - Check the user password length
+   * - If all previous checks are OK, try to signup the user
+   *
+   * @param {Object} user - user entered in the signup form
+   */
   createUserAccount({ commit, state }, user) {
     commit(types.IS_SIGNUP_PROCESSING, true);
     commit(types.RESET_SIGNUP_ERRORS);
@@ -84,6 +110,10 @@ export default {
       commit(types.IS_SIGNUP_PROCESSING, false);
     }
   },
+
+  /**
+   * Logout the user.
+   */
   logout({ commit }) {
     userServices.logout().then(() => commit(types.LOGOUT));
   },
