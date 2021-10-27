@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "true",
+        ".write": "auth != null && auth.uid == $uid || root.child('/users/' + auth.uid + '/role').val() === 'admin'",
+        "accumulation": { ".validate": true },
+        "id": { ".validate": true },
+        "role": { ".validate": true },
+        "totalPoints": { ".validate": true },
+        "username": { ".validate": true },
+        "answers": { ".validate": true },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}
