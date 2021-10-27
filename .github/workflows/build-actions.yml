@@ -27,35 +27,11 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           source: 'index.js,dist/index.html'
           target: ${{ secrets.SERVER_TARGET }}
-      - name: 'Deploy favicon'
+      - name: 'Deploy packaged files'
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          source: 'dist/favicon.ico'
+          source: 'dist/*,dist/**/*'
           target: ${{ secrets.SERVER_PUBLIC_TARGET }}
-      - name: 'Deploy css files'
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          port: ${{ secrets.SERVER_PORT }}
-          source: 'dist/css/*'
-          target: ${{ secrets.SERVER_PUBLIC_TARGET }}/css
-      - name: 'Deploy fonts files'
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          port: ${{ secrets.SERVER_PORT }}
-          source: 'dist/fonts/*'
-          target: ${{ secrets.SERVER_PUBLIC_TARGET }}/fonts
-      - name: 'Deploy js files'
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          port: ${{ secrets.SERVER_PORT }}
-          source: 'dist/js/*'
-          target: ${{ secrets.SERVER_PUBLIC_TARGET }}/js
