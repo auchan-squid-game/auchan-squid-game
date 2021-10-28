@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['calendar-cell-container', { hover: isHovered }]"
+    :class="['calendar-cell-container', { hover: isHovered, enable }]"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
   >
@@ -27,10 +27,7 @@
       </div>
     </div>
 
-    <div :class="['calendar-cell-verso', { enable }]">
-      <template v-if="enable">VOIR L'ENIGME</template>
-      <template v-else><Icon name="lock" /></template>
-    </div>
+    <div class="calendar-cell-verso">VOIR L'ENIGME</div>
   </div>
 </template>
 
@@ -60,16 +57,42 @@
 <style lang="scss" scoped>
   @import '@/assets/scss/_colors.scss';
 
+  @keyframes wizz {
+    0%,
+    100% {
+      transform: translateX(0px);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translateX(-7px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: translateX(7px);
+    }
+  }
+
   .calendar-cell-container {
     position: relative;
     border-radius: 10px;
 
     &.hover {
-      .calendar-cell {
-        transform: rotateY(180deg);
+      &.enable {
+        .calendar-cell {
+          transform: rotateY(180deg);
+        }
+        .calendar-cell-verso {
+          transform: rotateY(360deg);
+        }
       }
-      .calendar-cell-verso {
-        transform: rotateY(360deg);
+
+      &:not(.enable) .calendar-cell {
+        animation: wizz 1s linear;
       }
     }
 
@@ -196,22 +219,6 @@
       background: $color-white;
       font-size: 20px;
       transform: rotateY(180deg);
-
-      &:not(.enable) {
-        background: repeating-linear-gradient(
-          -45deg,
-          $color-background-light,
-          $color-background-light 20px,
-          $color-background-very-light 20px,
-          $color-background-very-light 40px
-        );
-
-        :deep(.icon) {
-          width: 75px;
-          height: 75px;
-          color: $color-white;
-        }
-      }
     }
   }
 </style>
