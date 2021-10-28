@@ -26,5 +26,9 @@
     align-items: center;
     width: 100%;
     height: 100%;
+
+    .enigma-section {
+      margin-bottom: 30px;
+    }
   }
 </style>
