@@ -27,16 +27,18 @@
       </div>
     </div>
 
-    <div class="calendar-cell-verso">VOIR L'ENIGME</div>
+    <div class="calendar-cell-verso">
+      <Button label="VOIR L'ENIGME" color="default" @click="showEnigmaPopup" />
+    </div>
   </div>
 </template>
 
 <script>
-  import { Icon } from '@/components';
+  import { Button, Icon } from '@/components';
 
   export default {
     name: 'CalendarCell',
-    components: { Icon },
+    components: { Button, Icon },
     props: {
       enable: { type: Boolean, default: false },
       day: { type: String, required: true },
