@@ -69,13 +69,13 @@
     50%,
     70%,
     90% {
-      transform: translateX(-7px);
+      transform: translateX(-4px);
     }
     20%,
     40%,
     60%,
     80% {
-      transform: translateX(7px);
+      transform: translateX(4px);
     }
   }
 
@@ -94,7 +94,7 @@
       }
 
       &:not(.enable) .calendar-cell {
-        animation: wizz 1s linear;
+        animation: wizz 0.7s linear;
       }
     }
 
