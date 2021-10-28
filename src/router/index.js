@@ -5,7 +5,7 @@ import { AuthenticationView, PageNotFoundView, HomepageView, LaunchCountdownView
 const launchAppDay = new Date('2021-12-01').getTime();
 const today = Date.now();
 const launched = launchAppDay - today < 0;
-const showCountdown = launched && process.env.NODE_ENV !== 'develop';
+const showCountdown = !launched && process.env.NODE_ENV !== 'develop';
 
 const routes = [
   { path: '/', component: showCountdown ? LaunchCountdownView : HomepageView },
