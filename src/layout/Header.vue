@@ -9,9 +9,6 @@
         <router-link to="/ranking">
           <div :class="['header-menu-item', { selected: $route.path === '/ranking' }]">LE CLASSEMENT</div>
         </router-link>
-        <router-link to="/contact-us">
-          <div :class="['header-menu-item', { selected: $route.path === '/contact-us' }]">NOUS CONTACTER</div>
-        </router-link>
         <router-link to="/admin">
           <div :class="['header-menu-item', { selected: $route.path === '/admin' }]">ADMINISTRATION</div>
         </router-link>
