@@ -9,7 +9,6 @@ export default {
     commit(types.IS_APP_LOADED, false);
 
     getAuth().onAuthStateChanged(user => {
-      console.log(user);
       if (user) {
         userServices.get(user.uid).then(userData => {
           commit(types.SET_USER, userData);

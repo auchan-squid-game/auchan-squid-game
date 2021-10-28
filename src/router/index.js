@@ -1,6 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import { AuthenticationView, PageNotFoundView, HomepageView, LaunchCountdownView, RankingView } from '../views';
+import {
+  AuthenticationView,
+  AdministationView,
+  PageNotFoundView,
+  HomepageView,
+  LaunchCountdownView,
+  RankingView,
+} from '../views';
 
 const launchAppDay = new Date('2021-12-01').getTime();
 const today = Date.now();
@@ -12,6 +19,7 @@ const routes = [
   { path: '/login', component: AuthenticationView },
   { path: '/signup', component: AuthenticationView },
   { path: '/ranking', component: showCountdown ? LaunchCountdownView : RankingView },
+  { path: '/admin', component: AdministationView },
   { path: '/:pathMatch(.*)*', component: PageNotFoundView },
 ];
 
