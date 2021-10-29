@@ -9,7 +9,13 @@
           <Icon name="x" />
         </div>
       </div>
-      <div id="popup-body"></div>
+      <div id="popup-body">
+        <div id="enigma-image"></div>
+        Votre reponse :
+        <div id="enigma-textarea">
+          <textarea></textarea>
+        </div>
+      </div>
       <div id="popup-actions">
         <Button label="Valider" color="default" />
       </div>
@@ -76,7 +82,6 @@
       display: flex;
       flex-direction: column;
       width: 800px;
-      height: 600px;
       border-radius: 20px;
       box-shadow: 0 0 20px $color-background;
       background: #ffffff;
@@ -103,9 +108,39 @@
       }
 
       #popup-body {
+        display: flex;
         flex: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         width: 100%;
+        padding: 20px;
         border-bottom: 2px solid $color-white-dark;
+
+        #enigma-image {
+          width: 500px;
+          height: 300px;
+          margin-bottom: 20px;
+          background: $color-christmas-green;
+        }
+
+        #enigma-textarea {
+          width: 100%;
+          height: 100px;
+          border-radius: 10px;
+          background: $color-white;
+
+          textarea {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            border: none;
+            background: transparent;
+            font-family: sans-serif;
+            font-size: 16px;
+            resize: none;
+          }
+        }
       }
 
       #popup-actions {
