@@ -6,5 +6,9 @@ export default {
   app: {
     isLoaded: false,
     isSignupProcessing: false,
+    enigmaPopup: {
+      show: false,
+      enigmaId: undefined,
+    },
   },
 };

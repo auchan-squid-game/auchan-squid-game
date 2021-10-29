@@ -19,4 +19,12 @@ export default {
   [types.SET_SIGNUP_ERROR](state, { input, message }) {
     state.errors.signup[input] = message;
   },
+  [types.CLOSE_ENIGMA_POPUP](state) {
+    state.app.enigmaPopup.show = false;
+    state.app.enigmaPopup.enigmaId = undefined;
+  },
+  [types.SHOW_ENIGMA_POPUP](state, enigmaId) {
+    state.app.enigmaPopup.show = true;
+    state.app.enigmaPopup.enigmaId = enigmaId;
+  },
 };

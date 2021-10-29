@@ -27,8 +27,8 @@
       </div>
     </div>
 
-    <div class="calendar-cell-verso">
-      <Button label="VOIR L'ENIGME" color="default" @click="showEnigmaPopup" />
+    <div class="calendar-cell-verso" @click="showEnigmaPopup">
+      <Button label="VOIR L'ENIGME" color="default" />
     </div>
   </div>
 </template>
@@ -52,6 +52,12 @@
       return {
         isHovered: false,
       };
+    },
+    methods: {
+      showEnigmaPopup() {
+        this.$store.dispatch('showEnigmaPopup');
+        console.log('showEnigmaPopup');
+      },
     },
   };
 </script>

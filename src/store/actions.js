@@ -80,4 +80,10 @@ export default {
   logout({ commit }) {
     userServices.logout().then(() => commit(types.LOGOUT));
   },
+  closeEnigmaPopup({ commit }) {
+    commit(types.CLOSE_ENIGMA_POPUP);
+  },
+  showEnigmaPopup({ commit }, enigmaId) {
+    commit(types.SHOW_ENIGMA_POPUP, enigmaId);
+  },
 };
