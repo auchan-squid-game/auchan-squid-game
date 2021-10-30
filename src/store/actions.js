@@ -13,16 +13,20 @@ export default {
     commit(types.IS_APP_LOADED, false);
 
     getAuth().onAuthStateChanged(user => {
+      const currentRoute = router.currentRoute.path;
+
       if (user) {
         userServices.get(user.uid).then(userData => {
           commit(types.SET_USER, userData);
           commit(types.IS_APP_LOADED, true);
-          router.push('/');
+
+          if (currentRoute === '/login' || currentRoute === '/signup') router.push('/');
         });
       } else {
         commit(types.LOGOUT);
         commit(types.IS_APP_LOADED, true);
-        router.push('/login');
+
+        if (currentRoute !== '/login' && currentRoute !== '/signup') router.push('/login');
       }
     });
   },
