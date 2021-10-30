@@ -9,7 +9,15 @@
       :value="email"
       :error="emailError"
     />
-    <Input type="password" label="Mot de passe" placeholder="••••••••••••" size="big" @update="password = $event" />
+    <Input
+      type="password"
+      label="Mot de passe"
+      placeholder="••••••••••••"
+      size="big"
+      @update="password = $event"
+      :value="password"
+      :eror="passwordError"
+    />
   </AuthentificationForm>
 </template>
 
@@ -31,7 +39,11 @@
       emailError() {
         return this.$store.state.errors.signin.email;
       },
+      passwordError() {
+        return this.$store.state.errors.signin.password;
+      },
     },
+
     methods: {
       signin() {
         this.$store.dispatch('signin', {

@@ -47,6 +47,24 @@ export default {
     if (!errors.mail) {
       userServices.signin(user);
     }
+    if (!errors.password) {
+      userServices.signin(user).catch(err => {
+        console.log('mon erreur' + err.code);
+        if (err.code === 'auth/wrong-password') {
+          console.log('je rentre ici');
+          commit(types.SET_SIGNIN_ERROR, { input: 'password', message: 'votre mode de passe est incorrecte' });
+        }
+        if (err.code === 'auth/user-disabled') {
+          commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'ce mail a été supprimé' });
+        }
+        if (err.code === 'auth/user-not-found') {
+          commit(types.SET_SIGNIN_ERROR, {
+            input: 'email',
+            message: 'cet adresse mail est pas renseigné dans notre base de donnèes, merci de vous inscrire ',
+          });
+        }
+      });
+    }
   },
 
   /**
