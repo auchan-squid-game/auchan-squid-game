@@ -80,7 +80,11 @@ export default {
   logout({ commit }) {
     userServices.logout().then(() => commit(types.LOGOUT));
   },
-  // eslint-disable-next-line no-unused-vars
+  /**
+   * Method that will get all answers that need to be checked in database.
+   * It will run through all answers and if it finds that the answer has no field 'isapproved' it will ad it to the state.
+   *
+   */
   getAllReponsesToCheck({ commit }) {
     userServices.getAllUsersThatHaveReponsesToCheck().then(users => {
       users.forEach(user =>
@@ -95,16 +99,35 @@ export default {
       );
     });
   },
-  // eslint-disable-next-line no-unused-vars
+  /**
+   * This method will set 5 additional points to the total of points of a user plus will add 1 point to the accumualation field.
+   * It will also set the status of the answer to true as it is approved. 
+   *
+   * @param {Object} payload - represents the information about the answer from a user :
+   *                           - id : The id of the enigma
+   *                           - answer: information about the answer from the user (userId, username, response)
+
+   */
   approveResponse({ commit }, payload) {
     userServices.getUser(payload.answer.userId).then(dataSnapshot => {
       const user = dataSnapshot.val();
-      console.log('totalpoints: ' + user);
       const userPoints = 5 + user.totalPoints + user.accumulation + 1;
-      console.log(userPoints);
       userServices.updateUserPointsOnApprove(payload.answer.userId, userPoints, user.accumulation + 1);
       userServices.updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, true);
       commit(types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer });
     });
+  },
+  /**
+   * This method will reset the accumulation field of a user to 0 as the answer is rejected.
+   * It will aslo set the status of the answer to false.
+   *
+   * @param {*} payload - represents the information about the answer from a user :
+   *                           - id : The id of the enigma
+   *                           - answer: information about the answer from the user (userId, username, response)
+   */
+  rejectResponse({ commit }, payload) {
+    userServices.updateUserPointsOnReject(payload.answer.userId);
+    userServices.updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, false);
+    commit(types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer });
   },
 };

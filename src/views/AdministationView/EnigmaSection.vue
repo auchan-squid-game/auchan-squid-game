@@ -18,7 +18,7 @@
             <div class="enigma-response-action" @click="approveResponse(id, answer)">
               <Icon name="check" />
             </div>
-            <div class="enigma-response-action" @click="rejectResponse">
+            <div class="enigma-response-action" @click="rejectResponse(id, answer)">
               <Icon name="x" />
             </div>
           </div>
@@ -48,8 +48,8 @@
       approveResponse(id, answer) {
         this.$store.dispatch('approveResponse', { id: id, answer: answer });
       },
-      rejectResponse() {
-        // TODO: Reject the response
+      rejectResponse(id, answer) {
+        this.$store.dispatch('rejectResponse', { id: id, answer: answer });
       },
     },
   };
