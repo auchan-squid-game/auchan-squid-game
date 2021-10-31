@@ -80,4 +80,31 @@ export default {
   logout({ commit }) {
     userServices.logout().then(() => commit(types.LOGOUT));
   },
+  // eslint-disable-next-line no-unused-vars
+  getAllReponsesToCheck({ commit }) {
+    userServices.getAllUsersThatHaveReponsesToCheck().then(users => {
+      users.forEach(user =>
+        Object.keys(user.answers).forEach(answerId => {
+          if (user.answers[answerId].isApproved === undefined) {
+            commit(types.SET_ANSWERS_TO_CHECK, {
+              answerId: answerId,
+              userAnswerInfos: { userId: user.id, username: user.username, response: user.answers[answerId].response },
+            });
+          }
+        }),
+      );
+    });
+  },
+  // eslint-disable-next-line no-unused-vars
+  approveResponse({ commit }, payload) {
+    userServices.getUser(payload.answer.userId).then(dataSnapshot => {
+      const user = dataSnapshot.val();
+      console.log('totalpoints: ' + user);
+      const userPoints = 5 + user.totalPoints + user.accumulation + 1;
+      console.log(userPoints);
+      userServices.updateUserPointsOnApprove(payload.answer.userId, userPoints, user.accumulation + 1);
+      userServices.updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, true);
+      commit(types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer });
+    });
+  },
 };

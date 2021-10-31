@@ -19,4 +19,11 @@ export default {
   [types.SET_SIGNUP_ERROR](state, { input, message }) {
     state.errors.signup[input] = message;
   },
+  [types.SET_ANSWERS_TO_CHECK](state, { answerId, userAnswerInfos }) {
+    state.answersToCheck[answerId].answers.push(userAnswerInfos);
+  },
+  [types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK](state, { answerId, userAnswerInfos }) {
+    const index = state.answersToCheck[answerId].answers.indexOf(userAnswerInfos);
+    state.answersToCheck[answerId].answers.splice(index, 1);
+  },
 };

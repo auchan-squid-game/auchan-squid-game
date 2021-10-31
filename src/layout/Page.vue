@@ -21,8 +21,8 @@
       },
     },
     beforeMount() {
-      if (this.shouldUserBeAuthenticated && !this.isUserAuthenticated) this.$router.push('/login');
-      if (!this.shouldUserBeAuthenticated && this.isUserAuthenticated) this.$router.push('/');
+      //if (this.shouldUserBeAuthenticated && !this.isUserAuthenticated) this.$router.push('/login');
+      //if (!this.shouldUserBeAuthenticated && this.isUserAuthenticated) this.$router.push('/');
     },
   };
 </script>

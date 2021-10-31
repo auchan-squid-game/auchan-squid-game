@@ -41,7 +41,7 @@
     components: { Button },
     computed: {
       isUserAuthenticated() {
-        return !!this.$store.state.user;
+        return !this.$store.state.user;
       },
       isLoginPage() {
         return this.$route.path === '/login';

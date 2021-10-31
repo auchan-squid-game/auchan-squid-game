@@ -17,4 +17,24 @@ export default {
       return set(ref(db, `/users/${uid}`), user).then(() => user);
     });
   },
+  getAllUsersThatHaveReponsesToCheck() {
+    return get(ref(db, '/users/')).then(dataSnapshot => {
+      return Object.values(dataSnapshot.val()).filter(userValues => {
+        return userValues.answers && Object.values(userValues.answers).some(answer => answer.isApproved === undefined);
+      });
+    });
+  },
+  getUser(userId) {
+    return get(ref(db, `/users/${userId}/`));
+  },
+  updateUserPointsOnApprove(userId, points, newAccumulation) {
+    const user = {
+      totalPoints: points,
+      accumulation: newAccumulation,
+    };
+    return set(ref(db, `/users/${userId}/`), user);
+  },
+  updateAnswerResultOnApproveOrOnReject(userId, answerId, isApproved) {
+    return set(ref(db, `/users/${userId}/answers/${answerId}/isApproved`), isApproved);
+  },
 };
