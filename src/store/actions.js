@@ -102,6 +102,7 @@ export default {
   /**
    * This method will set 5 additional points to the total of points of a user plus will add 1 point to the accumualation field.
    * It will also set the status of the answer to true as it is approved. 
+   * It will remove also the answer from the anwers to check in the state. 
    *
    * @param {Object} payload - represents the information about the answer from a user :
    *                           - id : The id of the enigma
@@ -120,6 +121,7 @@ export default {
   /**
    * This method will reset the accumulation field of a user to 0 as the answer is rejected.
    * It will aslo set the status of the answer to false.
+   * It will remove also the answer from the anwers to check in the state.
    *
    * @param {*} payload - represents the information about the answer from a user :
    *                           - id : The id of the enigma

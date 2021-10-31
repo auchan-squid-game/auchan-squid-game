@@ -16,6 +16,10 @@ export default {
       title: "TITRE DE L'enigme 3",
       answers: [],
     },
+    11114: {
+      title: "TITRE DE L'enigme 4",
+      answers: [],
+    },
   },
   app: {
     isLoaded: false,

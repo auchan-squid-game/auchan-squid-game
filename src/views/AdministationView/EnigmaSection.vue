@@ -1,5 +1,5 @@
 <template>
-  <div v-for="(value, id) in answersToCheck" :key="value.id">
+  <div v-for="(value, id) in answersToCheck" :key="id">
     <div class="enigma-section">
       <div class="enigma-header" @click="showDetails = !showDetails">
         <div class="enigma-header-details">
@@ -10,7 +10,7 @@
           <Button icon="chevron-down" color="default" />
         </div>
       </div>
-      <div :class="['enigma-container', { show: showDetails }]" v-for="answer in value.answers" :key="answer.id">
+      <div :class="['enigma-container', { show: showDetails }]" v-for="answer in value.answers" :key="answer.userId">
         <div class="enigma-response-row">
           <div class="enigma-response-user">{{ answer.username }}</div>
           <div class="enigma-response">{{ answer.response }}</div>
