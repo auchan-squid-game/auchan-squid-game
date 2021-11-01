@@ -1,130 +1,130 @@
 {
   "enigmas": [
     {
-      "id": "0112",
+      "id": "001",
       "title": "Enigme 01",
       "image": "/enigmas/test-enigme1.png",
-      "startDate": "01/12/2021",
-      "endDate": "03/12/2021"
+      "startDate": "2021-12-01",
+      "endDate": "2021-12-03"
     },
     {
-      "idEnigma": "0212",
+      "idEnigma": "002",
       "title": "Enigme 02",
       "image": "/enigmas/test-enigme2.png",
-      "startDate": "02/12/2021",
-      "endDate": "04/12/2021"
+      "startDate": "2021-12-02",
+      "endDate": "2021-12-04"
     },
     {
-      "idEnigma": "0312",
+      "idEnigma": "003",
       "title": "Enigme 03",
       "image": "/enigmas/test-enigme3.png",
-      "startDate": "03/12/2021",
-      "endDate": "05/12/2021"
+      "startDate": "2021-12-03",
+      "endDate": "2021-12-05"
     },
     {
-      "idEnigma": "0412",
+      "idEnigma": "004",
       "title": "Enigme 04",
       "image": "/enigmas/test-enigme4.png",
-      "startDate": "06/12/2021",
-      "endDate": "08/12/2021"
+      "startDate": "2021-12-06",
+      "endDate": "2021-12-08"
     },
     {
-      "id": "0512",
+      "id": "005",
       "title": "Enigme 05",
       "image": "/enigmas/test-enigme1.png",
-      "startDate": "07/12/2021",
-      "endDate": "09/12/2021"
+      "startDate": "2021-12-07",
+      "endDate": "2021-12-09"
     },
     {
-      "idEnigma": "0612",
+      "idEnigma": "006",
       "title": "Enigme 06",
       "image": "/enigmas/test-enigme2.png",
-      "startDate": "08/12/2021",
-      "endDate": "10/12/2021"
+      "startDate": "2021-12-08",
+      "endDate": "2021-12-10"
     },
     {
-      "idEnigma": "0712",
+      "idEnigma": "007",
       "title": "Enigme 07",
       "image": "/enigmas/test-enigme3.png",
-      "startDate": "09/12/2021",
-      "endDate": "11/12/2021"
+      "startDate": "2021-12-09",
+      "endDate": "2021-12-11"
     },
     {
-      "idEnigma": "0812",
+      "idEnigma": "008",
       "title": "Enigme 08",
       "image": "/enigmas/test-enigme4.png",
-      "startDate": "10/12/2021",
-      "endDate": "12/12/2021"
+      "startDate": "2021-12-10",
+      "endDate": "2021-12-12"
     },
     {
-      "id": "0912",
+      "id": "009",
       "title": "Enigme 09",
       "image": "/enigmas/test-enigme1.png",
-      "startDate": "13/12/2021",
-      "endDate": "15/12/2021"
+      "startDate": "2021-12-13",
+      "endDate": "2021-12-15"
     },
     {
-      "idEnigma": "1012",
+      "idEnigma": "010",
       "title": "Enigme 10",
       "image": "/enigmas/test-enigme2.png",
-      "startDate": "14/12/2021",
-      "endDate": "16/12/2021"
+      "startDate": "2021-12-14",
+      "endDate": "2021-12-16"
     },
     {
-      "idEnigma": "1112",
+      "idEnigma": "011",
       "title": "Enigme 11",
       "image": "/enigmas/test-enigme3.png",
-      "startDate": "15/12/2021",
-      "endDate": "17/12/2021"
+      "startDate": "2021-12-15",
+      "endDate": "2021-12-17"
     },
     {
-      "idEnigma": "1212",
+      "idEnigma": "012",
       "title": "Enigme 12",
       "image": "/enigmas/test-enigme4.png",
-      "startDate": "16/12/2021",
-      "endDate": "18/12/2021"
+      "startDate": "2021-12-16",
+      "endDate": "2021-12-18"
     },
     {
-      "idEnigma": "1312",
+      "idEnigma": "013",
       "title": "Enigme 13",
       "image": "/enigmas/test-enigme2.png",
-      "startDate": "17/12/2021",
-      "endDate": "19/12/2021"
+      "startDate": "2021-12-17",
+      "endDate": "2021-12-19"
     },
     {
-      "idEnigma": "1412",
+      "idEnigma": "014",
       "title": "Enigme 14",
       "image": "/enigmas/test-enigme3.png",
-      "startDate": "20/12/2021",
-      "endDate": "22/12/2021"
+      "startDate": "2021-12-20",
+      "endDate": "2021-12-22"
     },
     {
-      "idEnigma": "1512",
+      "idEnigma": "015",
       "title": "Enigme 15",
       "image": "/enigmas/test-enigme4.png",
-      "startDate": "21/12/2021",
-      "endDate": "23/12/2021"
+      "startDate": "2021-12-21",
+      "endDate": "2021-12-23"
     },
     {
-      "idEnigma": "1612",
+      "idEnigma": "016",
       "title": "Enigme 16",
       "image": "/enigmas/test-enigme2.png",
-      "startDate": "22/12/2021",
-      "endDate": "24/12/2021"
+      "startDate": "2021-12-22",
+      "endDate": "2021-12-24"
     },
     {
-      "idEnigma": "1712",
+      "idEnigma": "017",
       "title": "Enigme 17",
       "image": "/enigmas/test-enigme3.png",
-      "startDate": "23/12/2021",
-      "endDate": "25/12/2021"
+      "startDate": "2021-12-23",
+      "endDate": "2021-12-25"
     },
     {
-      "idEnigma": "1812",
+      "idEnigma": "018",
       "title": "Enigme 18",
       "image": "/enigmas/test-enigme4.png",
-      "startDate": "24/12/2021",
-      "endDate": "26/12/2021"
+      "startDate": "2021-12-24",
+      "endDate": "2021-12-26"
     }
   ]
 }
