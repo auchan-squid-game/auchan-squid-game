@@ -7,5 +7,6 @@ export default {
   app: {
     isLoaded: false,
     isSignupProcessing: false,
+    isSigninProcessing: false,
   },
 };
