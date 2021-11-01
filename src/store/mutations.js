@@ -1,4 +1,5 @@
 import types from '@/constants/mutation-types';
+const enigmasJsonFile = require('../enigmas.json');
 
 export default {
   [types.IS_APP_LOADED](state, isLoaded) {
@@ -19,8 +20,23 @@ export default {
   [types.SET_SIGNUP_ERROR](state, { input, message }) {
     state.errors.signup[input] = message;
   },
+  [types.RESET_ANSWERS_TO_CHECK](state) {
+    state.answersToCheck = {};
+  },
   [types.SET_ANSWERS_TO_CHECK](state, { answerId, userAnswerInfos }) {
-    state.answersToCheck[answerId].answers.push(userAnswerInfos);
+    if (state.answersToCheck[answerId]) {
+      state.answersToCheck[answerId].answers.push(userAnswerInfos);
+    } else {
+      const titleForEnigma = enigmasJsonFile.enigmas
+        .filter(enigma => {
+          return enigma.id === answerId;
+        })
+        .map(enigmaToUseToGetTitle => enigmaToUseToGetTitle.title);
+      state.answersToCheck[answerId] = {
+        title: titleForEnigma[0],
+        answers: [userAnswerInfos],
+      };
+    }
   },
   [types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK](state, { answerId, userAnswerInfos }) {
     const index = state.answersToCheck[answerId].answers.indexOf(userAnswerInfos);

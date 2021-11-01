@@ -86,6 +86,7 @@ export default {
    *
    */
   getAllReponsesToCheck({ commit }) {
+    commit(types.RESET_ANSWERS_TO_CHECK);
     userServices.getAllUsersThatHaveReponsesToCheck().then(users => {
       users.forEach(user =>
         Object.keys(user.answers).forEach(answerId => {
@@ -113,9 +114,13 @@ export default {
     userServices.getUser(payload.answer.userId).then(dataSnapshot => {
       const user = dataSnapshot.val();
       const userPoints = 5 + user.totalPoints + user.accumulation + 1;
-      userServices.updateUserPointsOnApprove(payload.answer.userId, userPoints, user.accumulation + 1);
-      userServices.updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, true);
-      commit(types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer });
+      userServices.updateUserPointsOnApprove(payload.answer.userId, userPoints, user.accumulation + 1).then(() => {
+        userServices
+          .updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, true)
+          .then(() =>
+            commit(types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer }),
+          );
+      });
     });
   },
   /**
@@ -129,7 +134,8 @@ export default {
    */
   rejectResponse({ commit }, payload) {
     userServices.updateUserPointsOnReject(payload.answer.userId);
-    userServices.updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, false);
-    commit(types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer });
+    userServices.updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, false).then(() => {
+      commit(types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer });
+    });
   },
 };
