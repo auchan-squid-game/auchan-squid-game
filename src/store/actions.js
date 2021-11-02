@@ -13,20 +13,16 @@ export default {
     commit(types.IS_APP_LOADED, false);
 
     getAuth().onAuthStateChanged(user => {
-      const currentRoute = router.currentRoute.path;
-
       if (user) {
         userServices.get(user.uid).then(userData => {
           commit(types.SET_USER, userData);
           commit(types.IS_APP_LOADED, true);
-
-          if (currentRoute === '/login' || currentRoute === '/signup') router.push('/');
+          router.push('/');
         });
       } else {
         commit(types.LOGOUT);
         commit(types.IS_APP_LOADED, true);
-
-        if (currentRoute !== '/login' && currentRoute !== '/signup') router.push('/login');
+        router.push('/login');
       }
     });
   },
@@ -43,31 +39,34 @@ export default {
 
     // Manage entered data
     if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) {
-      commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'Adresse mail invalide' });
+      commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'Adressemail invalide' });
     }
 
     // Signin user (if no previous error)
     const errors = state.errors.signin;
-    if (!errors.mail) {
-      userServices.signin(user);
-    }
-    if (!errors.password) {
-      userServices.signin(user).catch(err => {
-        console.log('mon erreur' + err.code);
-        if (err.code === 'auth/wrong-password') {
-          console.log('je rentre ici');
-          commit(types.SET_SIGNIN_ERROR, { input: 'password', message: 'votre mode de passe est incorrecte' });
-        }
-        if (err.code === 'auth/user-disabled') {
-          commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'ce mail a été supprimé' });
-        }
-        if (err.code === 'auth/user-not-found') {
-          commit(types.SET_SIGNIN_ERROR, {
-            input: 'email',
-            message: 'cet adresse mail est pas renseigné dans notre base de donnèes, merci de vous inscrire ',
-          });
-        }
-      });
+    if (!errors.password || !errors.email) {
+      //userServices.signin(user);
+      userServices
+        .signin(user)
+        .catch(err => {
+          if (err.code === 'auth/wrong-password') {
+            commit(types.SET_SIGNIN_ERROR, { input: 'password', message: 'votre mode de passe est incorrecte' });
+          }
+          if (err.code === 'auth/user-disabled') {
+            commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'Utilisateur désactivé' });
+          }
+          if (err.code === 'auth/user-not-found') {
+            commit(types.SET_SIGNIN_ERROR, {
+              input: 'email',
+              message: 'Adresse mail inconnue, veuillez vous inscrire',
+            });
+          }
+        })
+        .finally(() => {
+          commit(types.IS_SIGNIN_PROCESSING, false);
+        });
+    } else {
+      commit(types.IS_SIGNIN_PROCESSING, false);
     }
   },
 

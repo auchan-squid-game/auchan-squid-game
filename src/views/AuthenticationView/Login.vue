@@ -16,7 +16,7 @@
       size="big"
       @update="password = $event"
       :value="password"
-      :eror="passwordError"
+      :error="passwordError"
     />
   </AuthentificationForm>
 </template>
