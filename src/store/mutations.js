@@ -27,7 +27,7 @@ export default {
     if (state.answersToCheck[answerId]) {
       state.answersToCheck[answerId].answers.push(userAnswerInfos);
     } else {
-      const titleForEnigma = enigmas.enigmas
+      const titleForEnigma = enigmas
         .filter(enigma => {
           return enigma.id === answerId;
         })
