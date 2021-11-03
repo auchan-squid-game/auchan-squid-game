@@ -108,13 +108,13 @@ export default {
    *                           - id : The id of the enigma
    *                           - answer: information about the answer from the user (userId, username, response)
    */
-  approveResponse({ commit }, payload) {
-    userServices.getUser(payload.answer.userId).then(user => {
+  approveResponse({ commit }, { answer, id }) {
+    userServices.getUser(answer.userId).then(user => {
       const userPoints = 5 + user.totalPoints + user.accumulation + 1;
-      userServices.updateUserPointsOnApprove(payload.answer.userId, userPoints, user.accumulation + 1).then(() => {
+      userServices.updateUserPointsOnApprove(answer.userId, userPoints, user.accumulation + 1).then(() => {
         userServices
-          .updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, true)
-          .then(() => commit(types.REMOVE_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer }));
+          .updateAnswerResultOnApproveOrOnReject(answer.userId, id, true)
+          .then(() => commit(types.REMOVE_ANSWER_TO_CHECK, { answerId: id, userAnswerInfos: answer }));
       });
     });
   },
@@ -127,10 +127,11 @@ export default {
    *                           - id : The id of the enigma
    *                           - answer: information about the answer from the user (userId, username, response)
    */
-  rejectResponse({ commit }, payload) {
-    userServices.updateUserPointsOnReject(payload.answer.userId);
-    userServices.updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, false).then(() => {
-      commit(types.REMOVE_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer });
+  rejectResponse({ commit }, { answer, id }) {
+    userServices.updateUserPointsOnReject(answer.userId).then(() => {
+      userServices.updateAnswerResultOnApproveOrOnReject(answer.userId, id, false).then(() => {
+        commit(types.REMOVE_ANSWER_TO_CHECK, { answerId: id, userAnswerInfos: answer });
+      });
     });
   },
 };

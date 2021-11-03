@@ -35,9 +35,7 @@ export default {
    * @returns {Promise<Object>} - a promise that shoud be handled from the caller. Promise will return a user object on succed.
    */
   getUser(userId) {
-    return get(ref(db, `/users/${userId}/`)).then(userSnap => {
-      return userSnap.val();
-    });
+    return get(ref(db, `/users/${userId}/`)).then(userSnap => userSnap.val());
   },
   /**
    * This function will call the database and set new total points and acuumulation points for a user with a given id.
