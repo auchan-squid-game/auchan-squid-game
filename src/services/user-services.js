@@ -35,7 +35,9 @@ export default {
    * @returns {Promise<Object>} - a promise that shoud be handled from the caller. Promise will return a user object on succed.
    */
   getUser(userId) {
-    return get(ref(db, `/users/${userId}/`));
+    return get(ref(db, `/users/${userId}/`)).then(userSnap => {
+      return userSnap.val();
+    });
   },
   /**
    * This function will call the database and set new total points and acuumulation points for a user with a given id.
@@ -44,11 +46,8 @@ export default {
    * @param {Number} newAccumulation - the total number of accumulation that should be updated for the user.
    * @returns {Promise<void>} - a promise without any data. Will be resolved if data successfully updated itself on server.
    */
-  updateUserPointsOnApprove(userId, points, newAccumulation) {
-    const updates = {};
-    updates[`/users/${userId}/totalPoints`] = points;
-    updates[`/users/${userId}/accumulation`] = newAccumulation;
-    return update(ref(db), updates);
+  updateUserPointsOnApprove(userId, totalPoints, accumulation) {
+    return update(ref(db, `/users/${userId}`), { totalPoints, accumulation });
   },
   /**
    * This method will call the database and set a status for a given answer and for a given user.
@@ -66,8 +65,6 @@ export default {
    * @returns {Promise<void>} - a promise without any data. Will be resolved if data successfully updated itself on server.
    */
   updateUserPointsOnReject(userId) {
-    const updates = {};
-    updates[`/users/${userId}/accumulation`] = 0;
-    return update(ref(db), updates);
+    return update(ref(db, `/users/${userId}`), { accumulation: 0 });
   },
 };

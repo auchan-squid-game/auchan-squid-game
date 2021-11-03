@@ -83,7 +83,6 @@ export default {
   /**
    * Method that will get all answers that need to be checked in database.
    * It will run through all answers and if it finds that the answer has no field 'isapproved' it will ad it to the state.
-   *
    */
   getAllReponsesToCheck({ commit }) {
     commit(types.RESET_ANSWERS_TO_CHECK);
@@ -91,7 +90,7 @@ export default {
       users.forEach(user =>
         Object.keys(user.answers).forEach(answerId => {
           if (user.answers[answerId].isApproved === undefined) {
-            commit(types.SET_ANSWERS_TO_CHECK, {
+            commit(types.ADD_ANSWER_TO_CHECK, {
               answerId: answerId,
               userAnswerInfos: { userId: user.id, username: user.username, response: user.answers[answerId].response },
             });
@@ -102,24 +101,20 @@ export default {
   },
   /**
    * This method will set 5 additional points to the total of points of a user plus will add 1 point to the accumualation field.
-   * It will also set the status of the answer to true as it is approved. 
-   * It will remove also the answer from the anwers to check in the state. 
+   * It will also set the status of the answer to true as it is approved.
+   * It will remove also the answer from the anwers to check in the state.
    *
    * @param {Object} payload - represents the information about the answer from a user :
    *                           - id : The id of the enigma
    *                           - answer: information about the answer from the user (userId, username, response)
-
    */
   approveResponse({ commit }, payload) {
-    userServices.getUser(payload.answer.userId).then(dataSnapshot => {
-      const user = dataSnapshot.val();
+    userServices.getUser(payload.answer.userId).then(user => {
       const userPoints = 5 + user.totalPoints + user.accumulation + 1;
       userServices.updateUserPointsOnApprove(payload.answer.userId, userPoints, user.accumulation + 1).then(() => {
         userServices
           .updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, true)
-          .then(() =>
-            commit(types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer }),
-          );
+          .then(() => commit(types.REMOVE_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer }));
       });
     });
   },
@@ -135,7 +130,7 @@ export default {
   rejectResponse({ commit }, payload) {
     userServices.updateUserPointsOnReject(payload.answer.userId);
     userServices.updateAnswerResultOnApproveOrOnReject(payload.answer.userId, payload.id, false).then(() => {
-      commit(types.REMOVE_ANSWER_FROM_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer });
+      commit(types.REMOVE_ANSWER_TO_CHECK, { answerId: payload.id, userAnswerInfos: payload.answer });
     });
   },
 };
