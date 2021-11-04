@@ -10,7 +10,9 @@
         </div>
       </div>
       <div id="popup-body">
-        <div id="enigma-image"></div>
+        <div id="enigma-image">
+          <img :src="require('@/assets/img/enigmas/test-enigme-1.png')" alt="" />
+        </div>
         Votre reponse :
         <div id="enigma-textarea">
           <textarea></textarea>
@@ -118,10 +120,17 @@
         border-bottom: 2px solid $color-white-dark;
 
         #enigma-image {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           width: 500px;
           height: 300px;
           margin-bottom: 20px;
-          background: $color-christmas-green;
+
+          img {
+            max-width: 100%;
+            max-height: 100%;
+          }
         }
 
         #enigma-textarea {
