@@ -6,7 +6,6 @@ import db from '@/config/firebase';
 export default {
   /**
    * Get all user data.
-   *
    * @param {String} uid - user ID
    * @returns Promise with all user data.
    */
@@ -16,7 +15,6 @@ export default {
 
   /**
    * Logout the user.
-   *
    * @returns Empty promise.
    */
   logout() {
@@ -25,7 +23,6 @@ export default {
 
   /**
    * Initialize user data (role, total points, accumulation of points), add user data in firebase and signup the user.
-   *
    * @param {Object} user - user data (username, email, password)
    * @returns Promise with user data stored in firebase.
    */
@@ -39,7 +36,6 @@ export default {
 
   /**
    * Signin the user.
-   *
    * @param {Object} param0 - user data (email, password)
    * @returns Empty promise.
    */
@@ -58,15 +54,6 @@ export default {
         return userValues.answers && Object.values(userValues.answers).some(answer => answer.isApproved === undefined);
       });
     });
-  },
-
-  /**
-   * This method will call the database to get all information from user with a given user id.
-   * @param {String} userId - the id of the user from which we want to get information.
-   * @returns {Promise<Object>} - a promise that shoud be handled from the caller. Promise will return a user object on succed.
-   */
-  getUser(userId) {
-    return get(ref(db, `/users/${userId}/`)).then(userSnap => userSnap.val());
   },
 
   /**

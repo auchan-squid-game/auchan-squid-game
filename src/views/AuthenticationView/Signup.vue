@@ -81,6 +81,9 @@
       passwordError() {
         return this.$store.state.errors.signup.password;
       },
+      isSignupProcessing() {
+        return this.$store.state.app.isSignupProcessing;
+      },
     },
     methods: {
       createUserAccount() {

@@ -1,5 +1,5 @@
 <template>
-  <AuthentificationForm title="Connexion" submitLabel="Se connecter" :submit="signin">
+  <AuthentificationForm title="Connexion" submitLabel="Se connecter" :submit="signin" :processing="isSigninProcessing">
     <Input
       type="text"
       label="Email"
@@ -41,6 +41,9 @@
       },
       passwordError() {
         return this.$store.state.errors.signin.password;
+      },
+      isSigninProcessing() {
+        return this.$store.state.app.isSigninProcessing;
       },
     },
 
