@@ -118,6 +118,7 @@ export default {
     if (!errors.projectCode && !errors.username && !errors.email && !errors.password) {
       userServices
         .signup(user)
+        .then(user => commit(types.SET_USER, user))
         .catch(err => {
           if (err.code === 'auth/email-already-in-use') {
             commit(types.SET_SIGNUP_ERROR, { input: 'email', message: 'Adresse mail deja utilisee' });
