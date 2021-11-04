@@ -1,7 +1,23 @@
 <template>
-  <AuthentificationForm title="Connexion" submitLabel="Se connecter" :submit="authenticate">
-    <Input type="text" label="Nom utilisateur" placeholder="Père noël" size="big" @update="username = $event" />
-    <Input type="password" label="Mot de passe" placeholder="••••••••••••" size="big" @update="password = $event" />
+  <AuthentificationForm title="Connexion" submitLabel="Se connecter" :submit="signin" :processing="isSigninProcessing">
+    <Input
+      type="text"
+      label="Email"
+      placeholder="Père noël@partner.auchan.fr"
+      size="big"
+      @update="email = $event"
+      :value="email"
+      :error="emailError"
+    />
+    <Input
+      type="password"
+      label="Mot de passe"
+      placeholder="••••••••••••"
+      size="big"
+      @update="password = $event"
+      :value="password"
+      :error="passwordError"
+    />
   </AuthentificationForm>
 </template>
 
@@ -15,17 +31,28 @@
     components: { Input, AuthentificationForm },
     data() {
       return {
-        username: '',
+        email: '',
         password: '',
       };
     },
-    methods: {
-      authenticate() {
-        // TODO: Check data entered by user
-        // TODO: Call actions to authenticate user
+    computed: {
+      emailError() {
+        return this.$store.state.errors.signin.email;
+      },
+      passwordError() {
+        return this.$store.state.errors.signin.password;
+      },
+      isSigninProcessing() {
+        return this.$store.state.app.isSigninProcessing;
+      },
+    },
 
-        // Redirect user to the homepage
-        this.$router.push('/');
+    methods: {
+      signin() {
+        this.$store.dispatch('signin', {
+          email: this.email,
+          password: this.password,
+        });
       },
     },
   };

@@ -1,15 +1,31 @@
-import { createUserWithEmailAndPassword, getAuth, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth, signOut } from 'firebase/auth';
 import { get, ref, set, update } from 'firebase/database';
 
 import db from '@/config/firebase';
 
 export default {
+  /**
+   * Get all user data.
+   * @param {String} uid - user ID
+   * @returns Promise with all user data.
+   */
   get(uid) {
     return get(ref(db, `/users/${uid}`)).then(snap => snap.val());
   },
+
+  /**
+   * Logout the user.
+   * @returns Empty promise.
+   */
   logout() {
     return signOut(getAuth());
   },
+
+  /**
+   * Initialize user data (role, total points, accumulation of points), add user data in firebase and signup the user.
+   * @param {Object} user - user data (username, email, password)
+   * @returns Promise with user data stored in firebase.
+   */
   signup({ username, email, password }) {
     return createUserWithEmailAndPassword(getAuth(), email, password).then(userCredentials => {
       const uid = userCredentials.user.uid;
@@ -17,6 +33,16 @@ export default {
       return set(ref(db, `/users/${uid}`), user).then(() => user);
     });
   },
+
+  /**
+   * Signin the user.
+   * @param {Object} param0 - user data (email, password)
+   * @returns Empty promise.
+   */
+  signin({ email, password }) {
+    return signInWithEmailAndPassword(getAuth(), email, password);
+  },
+
   /**
    * This method will call the database and retreive all users.
    * From that, it will filter all users that have at least one answer that needs to be checked.
@@ -29,14 +55,7 @@ export default {
       });
     });
   },
-  /**
-   * This method will call the database to get all information from user with a given user id.
-   * @param {String} userId - the id of the user from which we want to get information.
-   * @returns {Promise<Object>} - a promise that shoud be handled from the caller. Promise will return a user object on succed.
-   */
-  getUser(userId) {
-    return get(ref(db, `/users/${userId}/`)).then(userSnap => userSnap.val());
-  },
+
   /**
    * This function will call the database and set new total points and acuumulation points for a user with a given id.
    * @param {String} userId - the id of the user.
@@ -47,6 +66,7 @@ export default {
   updateUserPointsOnApprove(userId, totalPoints, accumulation) {
     return update(ref(db, `/users/${userId}`), { totalPoints, accumulation });
   },
+
   /**
    * This method will call the database and set a status for a given answer and for a given user.
    * @param {String} userId - the id of the user.
@@ -57,6 +77,7 @@ export default {
   updateAnswerResultOnApproveOrOnReject(userId, answerId, isApproved) {
     return set(ref(db, `/users/${userId}/answers/${answerId}/isApproved`), isApproved);
   },
+
   /**
    * This method will call the database and reset the accumulation field to 0 for a given user.
    * @param {String} userId - the id of a user.

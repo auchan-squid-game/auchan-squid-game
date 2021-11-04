@@ -7,29 +7,80 @@ import router from '@/router';
 import userServices from '@/services/user-services';
 
 export default {
+  /**
+   * Add listener on authenticate state changes.
+   * If the user is authenticated, he is redirect to the homepage, to the login page otherwise
+   */
   syncActions({ commit }) {
     commit(types.IS_APP_LOADED, false);
 
     commit(types.SET_ENIGMAS_DATA, process.env.NODE_ENV === 'develop' ? devEnigmas : enigmas);
 
     getAuth().onAuthStateChanged(user => {
-      const currentRoute = router.currentRoute.path;
+      const currentRoute = router.currentRoute.value.path;
 
       if (user) {
         userServices.get(user.uid).then(userData => {
           commit(types.SET_USER, userData);
           commit(types.IS_APP_LOADED, true);
-
           if (currentRoute === '/login' || currentRoute === '/signup') router.push('/');
         });
       } else {
         commit(types.LOGOUT);
         commit(types.IS_APP_LOADED, true);
-
         if (currentRoute !== '/login' && currentRoute !== '/signup') router.push('/login');
       }
     });
   },
+
+  /**
+   * Signing the user with data entered :
+   * - Check if the user email is valid
+   * - If all previous checks are OK, try to signin the user
+   * @param {Object} user - user entered in the login form
+   */
+  signin({ commit, state }, user) {
+    commit(types.RESET_SIGNIN_ERRORS);
+    commit(types.IS_SIGNIN_PROCESSING, true);
+
+    // Manage entered data
+    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) {
+      commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'Adresse mail invalide' });
+    }
+
+    // Signin user (if no previous error)
+    if (!state.errors.signin.email) {
+      userServices
+        .signin(user)
+        .catch(err => {
+          if (err.code === 'auth/wrong-password') {
+            commit(types.SET_SIGNIN_ERROR, { input: 'password', message: 'Mot de passe incorrect' });
+          }
+          if (err.code === 'auth/user-disabled') {
+            commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'Utilisateur désactivé' });
+          }
+          if (err.code === 'auth/user-not-found') {
+            commit(types.SET_SIGNIN_ERROR, { input: 'email', message: 'Adresse mail inconnue' });
+          }
+        })
+        .finally(() => {
+          commit(types.IS_SIGNIN_PROCESSING, false);
+        });
+    } else {
+      commit(types.IS_SIGNIN_PROCESSING, false);
+    }
+  },
+
+  /**
+   * Signup the user with data entered :
+   * - Check if the project code is correct
+   * - Check the username length
+   * - Check if the user email is valid
+   * - Check if the password and the confirm password fileds have the same value
+   * - Check the user password length
+   * - If all previous checks are OK, try to signup the user
+   * @param {Object} user - user entered in the signup form
+   */
   createUserAccount({ commit, state }, user) {
     commit(types.IS_SIGNUP_PROCESSING, true);
     commit(types.RESET_SIGNUP_ERRORS);
@@ -81,9 +132,14 @@ export default {
       commit(types.IS_SIGNUP_PROCESSING, false);
     }
   },
+
+  /**
+   * Logout the user.
+   */
   logout({ commit }) {
     userServices.logout().then(() => commit(types.LOGOUT));
   },
+
   /**
    * Close enigma popup.
    */
@@ -116,17 +172,17 @@ export default {
       );
     });
   },
+
   /**
    * This method will set 5 additional points to the total of points of a user plus will add 1 point to the accumualation field.
    * It will also set the status of the answer to true as it is approved.
    * It will remove also the answer from the anwers to check in the state.
-   *
    * @param {Object} payload - represents the information about the answer from a user :
    *                           - id : The id of the enigma
    *                           - answer: information about the answer from the user (userId, username, response)
    */
   approveResponse({ commit }, { answer, id }) {
-    userServices.getUser(answer.userId).then(user => {
+    userServices.get(answer.userId).then(user => {
       const userPoints = 5 + user.totalPoints + user.accumulation + 1;
       userServices.updateUserPointsOnApprove(answer.userId, userPoints, user.accumulation + 1).then(() => {
         userServices
@@ -135,12 +191,12 @@ export default {
       });
     });
   },
+
   /**
    * This method will reset the accumulation field of a user to 0 as the answer is rejected.
    * It will aslo set the status of the answer to false.
    * It will remove also the answer from the anwers to check in the state.
-   *
-   * @param {*} payload - represents the information about the answer from a user :
+   * @param {Object} payload - represents the information about the answer from a user :
    *                           - id : The id of the enigma
    *                           - answer: information about the answer from the user (userId, username, response)
    */
