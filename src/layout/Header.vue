@@ -2,20 +2,20 @@
   <div id="header">
     <div id="logo">Auchan Squid Game</div>
     <div id="header-menu">
-      <template v-if="isUserAuthenticated">
+      <template v-if="!!currentUser">
         <router-link to="/">
           <div :class="['header-menu-item', { selected: $route.path === '/' }]">LE JEU</div>
         </router-link>
         <router-link to="/ranking">
           <div :class="['header-menu-item', { selected: $route.path === '/ranking' }]">LE CLASSEMENT</div>
         </router-link>
-        <router-link to="/admin">
+        <router-link v-if="currentUser.role === 'admin'" to="/admin">
           <div :class="['header-menu-item', { selected: $route.path === '/admin' }]">ADMINISTRATION</div>
         </router-link>
       </template>
     </div>
     <div id="header-actions">
-      <template v-if="isUserAuthenticated">
+      <template v-if="!!currentUser">
         <Button icon="logout" label="DECONNEXION" color="default" size="medium" type="classic" @click="logout" />
       </template>
       <template v-else>
@@ -40,20 +40,14 @@
     name: 'Header',
     components: { Button },
     computed: {
-      isUserAuthenticated() {
-        return !!this.$store.state.user;
+      currentUser() {
+        return this.$store.state.user;
       },
       isLoginPage() {
         return this.$route.path === '/login';
       },
     },
     methods: {
-      showLoginPage() {
-        this.$router.push('/login');
-      },
-      showSignupPage() {
-        this.$router.push('/signup');
-      },
       logout() {
         this.$store.dispatch('logout');
       },

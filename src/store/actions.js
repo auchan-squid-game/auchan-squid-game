@@ -1,5 +1,7 @@
 import { getAuth } from 'firebase/auth';
 
+import enigmas from '@/enigmas.json';
+import devEnigmas from '@/dev-enigmas.json';
 import types from '@/constants/mutation-types';
 import router from '@/router';
 import userServices from '@/services/user-services';
@@ -7,6 +9,8 @@ import userServices from '@/services/user-services';
 export default {
   syncActions({ commit }) {
     commit(types.IS_APP_LOADED, false);
+
+    commit(types.SET_ENIGMAS_DATA, process.env.NODE_ENV === 'develop' ? devEnigmas : enigmas);
 
     getAuth().onAuthStateChanged(user => {
       const currentRoute = router.currentRoute.path;

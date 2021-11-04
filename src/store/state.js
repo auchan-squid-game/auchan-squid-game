@@ -1,5 +1,6 @@
 export default {
   user: undefined,
+  enigmas: [],
   errors: {
     signup: {},
   },

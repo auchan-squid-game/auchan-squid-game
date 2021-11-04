@@ -1,24 +1,24 @@
 <template>
   <div id="calendar-container">
     <div id="calendar">
-      <CalendarCell id="cell-1" day="1" enable centeredIcon="snowflake" />
-      <CalendarCell id="cell-2" day="2" enable />
-      <CalendarCell id="cell-3" day="3" enable />
-      <CalendarCell id="cell-6" day="6" enable text="Bonnes vacances" direction="horizontal" />
-      <CalendarCell id="cell-7" day="7" enable centeredIcon="moon-stars" />
-      <CalendarCell id="cell-8" day="8" enable />
-      <CalendarCell id="cell-9" day="9" enable />
-      <CalendarCell id="cell-10" day="10" />
-      <CalendarCell id="cell-13" day="13" centeredIcon="christmas-tree" />
-      <CalendarCell id="cell-14" day="14" icon="christmas-leaves" iconPosition="right" />
-      <CalendarCell id="cell-15" day="15" />
-      <CalendarCell id="cell-16" day="16" />
-      <CalendarCell id="cell-17" day="17" icon="christmas-socks" iconPosition="left" />
-      <CalendarCell id="cell-20" day="20" />
-      <CalendarCell id="cell-21" day="21" />
-      <CalendarCell id="cell-23" day="23" />
-      <CalendarCell id="cell-22" day="22" icon="sugar-cane" iconPosition="right" />
-      <CalendarCell id="cell-24" day="24" text="Joyeux Noël" direction="vertical" />
+      <CalendarCell id="cell-1" :enigma="enigmas[0]" centeredIcon="snowflake" />
+      <CalendarCell id="cell-2" :enigma="enigmas[1]" />
+      <CalendarCell id="cell-3" :enigma="enigmas[2]" />
+      <CalendarCell id="cell-6" :enigma="enigmas[3]" text="Bonnes vacances" direction="horizontal" />
+      <CalendarCell id="cell-7" :enigma="enigmas[4]" centeredIcon="moon-stars" />
+      <CalendarCell id="cell-8" :enigma="enigmas[5]" />
+      <CalendarCell id="cell-9" :enigma="enigmas[6]" />
+      <CalendarCell id="cell-10" :enigma="enigmas[7]" />
+      <CalendarCell id="cell-13" :enigma="enigmas[8]" centeredIcon="christmas-tree" />
+      <CalendarCell id="cell-14" :enigma="enigmas[9]" icon="christmas-leaves" iconPosition="right" />
+      <CalendarCell id="cell-15" :enigma="enigmas[10]" />
+      <CalendarCell id="cell-16" :enigma="enigmas[11]" />
+      <CalendarCell id="cell-17" :enigma="enigmas[12]" icon="christmas-socks" iconPosition="left" />
+      <CalendarCell id="cell-20" :enigma="enigmas[13]" />
+      <CalendarCell id="cell-21" :enigma="enigmas[14]" />
+      <CalendarCell id="cell-23" :enigma="enigmas[15]" />
+      <CalendarCell id="cell-22" :enigma="enigmas[16]" icon="sugar-cane" iconPosition="right" />
+      <CalendarCell id="cell-24" :enigma="enigmas[17]" text="Joyeux Noël" direction="vertical" />
     </div>
   </div>
 </template>
@@ -29,6 +29,11 @@
   export default {
     name: 'Calendar',
     components: { CalendarCell },
+    computed: {
+      enigmas() {
+        return this.$store.state.enigmas;
+      },
+    },
   };
 </script>
 
