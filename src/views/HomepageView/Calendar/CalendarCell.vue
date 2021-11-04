@@ -27,8 +27,8 @@
       </div>
     </div>
 
-    <div class="calendar-cell-verso">
-      <Button label="VOIR L'ENIGME" color="default" @click="showEnigmaPopup" />
+    <div class="calendar-cell-verso" @click="showEnigmaPopup">
+      <Button label="VOIR L'ENIGME" color="default" />
     </div>
   </div>
 </template>
@@ -40,8 +40,7 @@
     name: 'CalendarCell',
     components: { Button, Icon },
     props: {
-      enable: { type: Boolean, default: false },
-      day: { type: String, required: true },
+      enigma: { type: Object, required: true },
       text: { type: String },
       direction: { type: String },
       centeredIcon: { type: String },
@@ -52,6 +51,20 @@
       return {
         isHovered: false,
       };
+    },
+    computed: {
+      day() {
+        return Number(this.enigma.startDate.split('-')[2]);
+      },
+      enable() {
+        const startDate = Date.parse(this.enigma.startDate) + 9 * 60 * 60 * 1000; // Start at 9:00 am
+        return Date.now() > startDate;
+      },
+    },
+    methods: {
+      showEnigmaPopup() {
+        this.$store.dispatch('showEnigmaPopup', this.enigma);
+      },
     },
   };
 </script>

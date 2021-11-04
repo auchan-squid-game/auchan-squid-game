@@ -1,5 +1,4 @@
 import types from '@/constants/mutation-types';
-import enigmas from '@/enigmas.json';
 
 export default {
   [types.IS_APP_LOADED](state, isLoaded) {
@@ -20,6 +19,9 @@ export default {
   [types.RESET_SIGNUP_ERRORS](state) {
     state.errors.signup = {};
   },
+  [types.SET_ENIGMAS_DATA](state, data) {
+    state.enigmas = data;
+  },
   [types.SET_USER](state, user) {
     state.user = user;
   },
@@ -29,6 +31,14 @@ export default {
   [types.SET_SIGNUP_ERROR](state, { input, message }) {
     state.errors.signup[input] = message;
   },
+  [types.CLOSE_ENIGMA_POPUP](state) {
+    state.app.enigmaPopup.show = false;
+    state.app.enigmaPopup.enigmaId = undefined;
+  },
+  [types.SHOW_ENIGMA_POPUP](state, enigma) {
+    state.app.enigmaPopup.show = true;
+    state.app.enigmaPopup.enigma = enigma;
+  },
   [types.RESET_ANSWERS_TO_CHECK](state) {
     state.answersToCheck = {};
   },
@@ -36,7 +46,7 @@ export default {
     if (state.answersToCheck[answerId]) {
       state.answersToCheck[answerId].answers.push(userAnswerInfos);
     } else {
-      const titleForEnigma = enigmas
+      const titleForEnigma = state.enigmas
         .filter(enigma => {
           return enigma.id === answerId;
         })

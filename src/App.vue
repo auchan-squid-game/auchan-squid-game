@@ -1,16 +1,18 @@
 <template>
   <div v-if="isAppLoaded" id="root">
     <Snowflakes />
+    <EnigmaPopup />
     <router-view />
   </div>
 </template>
 
 <script>
   import Snowflakes from '@/layout/Snowflakes';
+  import { EnigmaPopup } from '@/views';
 
   export default {
     name: 'App',
-    components: { Snowflakes },
+    components: { Snowflakes, EnigmaPopup },
     computed: {
       isAppLoaded() {
         return this.$store.state.app.isLoaded;
@@ -53,6 +55,7 @@
   }
 
   #root {
+    position: relative;
     display: flex;
     flex-direction: column;
   }
