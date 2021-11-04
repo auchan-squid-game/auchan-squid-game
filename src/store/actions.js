@@ -138,4 +138,58 @@ export default {
   logout({ commit }) {
     userServices.logout().then(() => commit(types.LOGOUT));
   },
+  /**
+   * Method that will get all answers that need to be checked in database.
+   * It will run through all answers and if it finds that the answer has no field 'isapproved' it will ad it to the state.
+   */
+  getAllReponsesToCheck({ commit }) {
+    commit(types.RESET_ANSWERS_TO_CHECK);
+    userServices.getAllUsersThatHaveReponsesToCheck().then(users => {
+      users.forEach(user =>
+        Object.keys(user.answers).forEach(answerId => {
+          if (user.answers[answerId].isApproved === undefined) {
+            commit(types.ADD_ANSWER_TO_CHECK, {
+              answerId: answerId,
+              userAnswerInfos: { userId: user.id, username: user.username, response: user.answers[answerId].response },
+            });
+          }
+        }),
+      );
+    });
+  },
+  /**
+   * This method will set 5 additional points to the total of points of a user plus will add 1 point to the accumualation field.
+   * It will also set the status of the answer to true as it is approved.
+   * It will remove also the answer from the anwers to check in the state.
+   *
+   * @param {Object} payload - represents the information about the answer from a user :
+   *                           - id : The id of the enigma
+   *                           - answer: information about the answer from the user (userId, username, response)
+   */
+  approveResponse({ commit }, { answer, id }) {
+    userServices.getUser(answer.userId).then(user => {
+      const userPoints = 5 + user.totalPoints + user.accumulation + 1;
+      userServices.updateUserPointsOnApprove(answer.userId, userPoints, user.accumulation + 1).then(() => {
+        userServices
+          .updateAnswerResultOnApproveOrOnReject(answer.userId, id, true)
+          .then(() => commit(types.REMOVE_ANSWER_TO_CHECK, { answerId: id, userAnswerInfos: answer }));
+      });
+    });
+  },
+  /**
+   * This method will reset the accumulation field of a user to 0 as the answer is rejected.
+   * It will aslo set the status of the answer to false.
+   * It will remove also the answer from the anwers to check in the state.
+   *
+   * @param {*} payload - represents the information about the answer from a user :
+   *                           - id : The id of the enigma
+   *                           - answer: information about the answer from the user (userId, username, response)
+   */
+  rejectResponse({ commit }, { answer, id }) {
+    userServices.updateUserPointsOnReject(answer.userId).then(() => {
+      userServices.updateAnswerResultOnApproveOrOnReject(answer.userId, id, false).then(() => {
+        commit(types.REMOVE_ANSWER_TO_CHECK, { answerId: id, userAnswerInfos: answer });
+      });
+    });
+  },
 };

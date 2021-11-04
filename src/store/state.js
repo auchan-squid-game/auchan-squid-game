@@ -4,6 +4,7 @@ export default {
     signin: {},
     signup: {},
   },
+  answersToCheck: {},
   app: {
     isLoaded: false,
     isSignupProcessing: false,

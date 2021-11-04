@@ -14,7 +14,11 @@
     name: 'AdministationView',
     components: { Page, EnigmaSection },
     beforeMount() {
-      if (this.$store.state.user.role !== 'admin') this.$router.push('/');
+      if (this.$store.state.user.role !== 'admin') {
+        this.$router.push('/');
+      } else {
+        this.$store.dispatch('getAllReponsesToCheck');
+      }
     },
   };
 </script>

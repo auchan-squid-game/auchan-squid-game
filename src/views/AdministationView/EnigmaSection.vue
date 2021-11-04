@@ -1,24 +1,26 @@
 <template>
-  <div class="enigma-section">
-    <div class="enigma-header" @click="showDetails = !showDetails">
-      <div class="enigma-header-details">
-        <div class="enigma-title">#{{ enigma.id }} - {{ enigma.title }}</div>
-        <div class="enigma-response-details">17 / 42 responses approved</div>
+  <div v-for="(enigma, id) in answersToCheck" :key="id">
+    <div class="enigma-section">
+      <div class="enigma-header" @click="showDetails = !showDetails">
+        <div class="enigma-header-details">
+          <div class="enigma-title">#{{ id }} - {{ enigma.title }}</div>
+          <div class="enigma-response-details">17 / 42 responses approved</div>
+        </div>
+        <div :class="['enigma-toggle', { up: showDetails }]">
+          <Button icon="chevron-down" color="default" />
+        </div>
       </div>
-      <div :class="['enigma-toggle', { up: showDetails }]">
-        <Button icon="chevron-down" color="default" />
-      </div>
-    </div>
-    <div :class="['enigma-container', { show: showDetails }]">
-      <div class="enigma-response-row">
-        <div class="enigma-response-user">Jean michel</div>
-        <div class="enigma-response">Ma super reponse de la mort qui tue .</div>
-        <div class="enigma-response-actions">
-          <div class="enigma-response-action" @click="approveResponse">
-            <Icon name="check" />
-          </div>
-          <div class="enigma-response-action" @click="rejectResponse">
-            <Icon name="x" />
+      <div :class="['enigma-container', { show: showDetails }]" v-for="answer in enigma.answers" :key="answer.userId">
+        <div class="enigma-response-row">
+          <div class="enigma-response-user">{{ answer.username }}</div>
+          <div class="enigma-response">{{ answer.response }}</div>
+          <div class="enigma-response-actions">
+            <div class="enigma-response-action" @click="approveResponse(id, answer)">
+              <Icon name="check" />
+            </div>
+            <div class="enigma-response-action" @click="rejectResponse(id, answer)">
+              <Icon name="x" />
+            </div>
           </div>
         </div>
       </div>
@@ -40,12 +42,17 @@
     props: {
       enigma: { type: Object, required: true },
     },
-    methods: {
-      approveResponse() {
-        // TODO: Approve the response
+    computed: {
+      answersToCheck() {
+        return this.$store.state.answersToCheck;
       },
-      rejectResponse() {
-        // TODO: Reject the response
+    },
+    methods: {
+      approveResponse(id, answer) {
+        this.$store.dispatch('approveResponse', { id: id, answer: answer });
+      },
+      rejectResponse(id, answer) {
+        this.$store.dispatch('rejectResponse', { id: id, answer: answer });
       },
     },
   };
