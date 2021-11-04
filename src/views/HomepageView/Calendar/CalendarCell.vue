@@ -63,8 +63,7 @@
     },
     methods: {
       showEnigmaPopup() {
-        this.$store.dispatch('showEnigmaPopup');
-        console.log('showEnigmaPopup');
+        this.$store.dispatch('showEnigmaPopup', this.enigma);
       },
     },
   };

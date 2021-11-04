@@ -87,8 +87,8 @@ export default {
   closeEnigmaPopup({ commit }) {
     commit(types.CLOSE_ENIGMA_POPUP);
   },
-  showEnigmaPopup({ commit }, enigmaId) {
-    commit(types.SHOW_ENIGMA_POPUP, enigmaId);
+  showEnigmaPopup({ commit }, enigma) {
+    commit(types.SHOW_ENIGMA_POPUP, enigma);
   },
   /**
    * Method that will get all answers that need to be checked in database.

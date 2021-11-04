@@ -26,9 +26,9 @@ export default {
     state.app.enigmaPopup.show = false;
     state.app.enigmaPopup.enigmaId = undefined;
   },
-  [types.SHOW_ENIGMA_POPUP](state, enigmaId) {
+  [types.SHOW_ENIGMA_POPUP](state, enigma) {
     state.app.enigmaPopup.show = true;
-    state.app.enigmaPopup.enigmaId = enigmaId;
+    state.app.enigmaPopup.enigma = enigma;
   },
   [types.RESET_ANSWERS_TO_CHECK](state) {
     state.answersToCheck = {};

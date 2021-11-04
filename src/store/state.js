@@ -10,7 +10,7 @@ export default {
     isSignupProcessing: false,
     enigmaPopup: {
       show: false,
-      enigmaId: undefined,
+      enigma: undefined,
     },
   },
 };

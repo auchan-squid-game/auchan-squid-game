@@ -2,16 +2,16 @@
   <div id="popup-center" :class="[{ show }]">
     <div id="blur" @click="closePopup" />
 
-    <div id="popup-enigma">
+    <div id="popup-enigma" v-if="!!enigma">
       <div id="popup-header">
-        <div id="popup-title">#1 - TITRE DE L'ENIGME 1</div>
+        <div id="popup-title"># {{ enigma.id }} - {{ enigma.title }}</div>
         <div id="popup-close" @click="closePopup">
           <Icon name="x" />
         </div>
       </div>
       <div id="popup-body">
         <div id="enigma-image">
-          <img :src="require('@/assets/img/enigmas/test-enigme-1.png')" alt="" />
+          <img :src="enigma.image" alt="" />
         </div>
         Votre reponse :
         <div id="enigma-textarea">
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div id="popup-actions">
-        <Button label="Valider" color="default" />
+        <Button label="Valider" color="default" @click="submit" />
       </div>
     </div>
   </div>
@@ -32,6 +32,9 @@
     name: 'EnigmaPopup',
     components: { Button, Icon },
     computed: {
+      enigma() {
+        return this.$store.state.app.enigmaPopup.enigma;
+      },
       show() {
         return this.$store.state.app.enigmaPopup.show;
       },
@@ -39,6 +42,9 @@
     methods: {
       closePopup() {
         this.$store.dispatch('closeEnigmaPopup');
+      },
+      submit() {
+        // TODO: Action to submit the response
       },
     },
   };
