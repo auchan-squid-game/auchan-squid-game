@@ -3,6 +3,7 @@ export default {
   errors: {
     signup: {},
   },
+  answersToCheck: {},
   app: {
     isLoaded: false,
     isSignupProcessing: false,
