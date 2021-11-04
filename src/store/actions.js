@@ -84,9 +84,16 @@ export default {
   logout({ commit }) {
     userServices.logout().then(() => commit(types.LOGOUT));
   },
+  /**
+   * Close enigma popup.
+   */
   closeEnigmaPopup({ commit }) {
     commit(types.CLOSE_ENIGMA_POPUP);
   },
+  /**
+   * Show enigma popup.
+   * @param {Object} enigma - enigma to show
+   */
   showEnigmaPopup({ commit }, enigma) {
     commit(types.SHOW_ENIGMA_POPUP, enigma);
   },
