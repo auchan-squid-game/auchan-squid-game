@@ -146,6 +146,7 @@ export default {
   closeEnigmaPopup({ commit }) {
     commit(types.CLOSE_ENIGMA_POPUP);
   },
+
   /**
    * Show enigma popup.
    * @param {Object} enigma - enigma to show
@@ -153,6 +154,7 @@ export default {
   showEnigmaPopup({ commit }, enigma) {
     commit(types.SHOW_ENIGMA_POPUP, enigma);
   },
+
   /**
    * Method that will get all answers that need to be checked in database.
    * It will run through all answers and if it finds that the answer has no field 'isapproved' it will ad it to the state.
