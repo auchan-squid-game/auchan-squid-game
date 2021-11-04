@@ -29,6 +29,9 @@ export default {
   [types.SET_SIGNUP_ERROR](state, { input, message }) {
     state.errors.signup[input] = message;
   },
+  [types.IS_SIGNIN_PROCESSING](state, isProcessing) {
+    state.app.isSigninProcessing = isProcessing;
+  },
   [types.RESET_ANSWERS_TO_CHECK](state) {
     state.answersToCheck = {};
   },
