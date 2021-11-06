@@ -3,7 +3,7 @@
     <div id="ranking-page">
       <div id="top-ranks">
         <div v-for="(topuser, index) in rankingTopUsers" :key="index" class="rank-container">
-          <div class="rank-info" :class="[index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : 'rank-3']">
+          <div class="rank-info" :class="['rank-info', `rank-${index + 1}`]">
             <div class="rank-number">{{ index + 1 }}</div>
             <div class="username">{{ topuser.username }}</div>
             <div class="total-points">{{ topuser.totalPoints }} pts</div>

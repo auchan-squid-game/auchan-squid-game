@@ -61,7 +61,7 @@ export default {
     const index = state.answersToCheck[answerId].answers.indexOf(userAnswerInfos);
     state.answersToCheck[answerId].answers.splice(index, 1);
   },
-  [types.SET_SORTED_USERS_BY_TOTALPOINTS](state, sortedArray) {
+  [types.SET_RANKING](state, sortedArray) {
     state.ranking = sortedArray;
   },
 };

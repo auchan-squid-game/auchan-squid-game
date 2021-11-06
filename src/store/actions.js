@@ -220,7 +220,7 @@ export default {
         .map(user => {
           return { username: user.username, totalPoints: user.totalPoints };
         });
-      commit(types.SET_SORTED_USERS_BY_TOTALPOINTS, sortedUsersByTotalPoints);
+      commit(types.SET_RANKING, sortedUsersByTotalPoints);
     });
   },
 };
