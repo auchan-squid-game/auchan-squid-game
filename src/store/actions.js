@@ -190,7 +190,6 @@ export default {
    *                           - answer: information about the answer from the user (userId, username, response)
    */
   approveResponse({ commit }, { answer, id }) {
-    console.log('ACTION', id);
     userServices.get(answer.userId).then(user => {
       const userPoints = 5 + user.totalPoints + user.accumulation + 1;
       userServices.updateUserPointsOnApprove(answer.userId, userPoints, user.accumulation + 1).then(() => {

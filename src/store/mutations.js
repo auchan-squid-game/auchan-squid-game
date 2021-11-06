@@ -59,8 +59,6 @@ export default {
     }
   },
   [types.REMOVE_ANSWER_TO_CHECK](state, { answerId, userAnswerInfos }) {
-    console.log(answerId);
-    console.log(state.answersToCheck);
     const index = state.answersToCheck[answerId].answers.indexOf(userAnswerInfos);
     state.answersToCheck[answerId].answers.splice(index, 1);
   },
