@@ -86,4 +86,11 @@ export default {
   updateUserPointsOnReject(userId) {
     return update(ref(db, `/users/${userId}`), { accumulation: 0 });
   },
+  /**
+   * This method will call the database and retreive all users.
+   * @returns {Promise} a promise that will return an object with all users on succeed.
+   */
+  getAllUsers() {
+    return get(ref(db, '/users/')).then(dataSnapshot => dataSnapshot.val());
+  },
 };

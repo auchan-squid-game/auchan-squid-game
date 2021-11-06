@@ -198,7 +198,7 @@ export default {
    * This method will reset the accumulation field of a user to 0 as the answer is rejected.
    * It will aslo set the status of the answer to false.
    * It will remove also the answer from the anwers to check in the state.
-   * @param {Object} payload - represents the information about the answer from a user :
+   * @param {Object} { answer, id } - represents the information about the answer from a user :
    *                           - id : The id of the enigma
    *                           - answer: information about the answer from the user (userId, username, response)
    */
@@ -207,6 +207,20 @@ export default {
       userServices.updateAnswerResultOnApproveOrOnReject(answer.userId, id, false).then(() => {
         commit(types.REMOVE_ANSWER_TO_CHECK, { answerId: id, userAnswerInfos: answer });
       });
+    });
+  },
+  /**
+   * This method will get all users from database and sort them according totalpoints.
+   * From that it sets in the state the username and the totalpoints from each user in an array sorted by descending.
+   */
+  prepareRankingTable({ commit }) {
+    userServices.getAllUsers().then(users => {
+      const sortedUsersByTotalPoints = Object.values(users)
+        .sort((userA, userB) => userB.totalPoints - userA.totalPoints)
+        .map(user => {
+          return { username: user.username, totalPoints: user.totalPoints };
+        });
+      commit(types.SET_RANKING, sortedUsersByTotalPoints);
     });
   },
 };
