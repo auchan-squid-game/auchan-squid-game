@@ -4,7 +4,8 @@
     "title": "Enigme 01",
     "image": "https://firebasestorage.googleapis.com/v0/b/auchansquidgame.appspot.com/o/test-enigme-1.png?alt=media&token=3a899827-eed1-49d8-bb26-311c6d15e3a7",
     "startDate": "2021-11-01",
-    "endDate": "2021-11-03"
+    "endDate": "2021-11-03",
+    "response": "Je suis une reponse de test attendue"
   },
   {
     "id": "2",

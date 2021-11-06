@@ -43,6 +43,16 @@ export default {
     return signInWithEmailAndPassword(getAuth(), email, password);
   },
 
+  submitResponse(user, enigmeId, response) {
+    return update(ref(db, `/users/${user.id}/answers`), {
+      [enigmeId]: {
+        id: enigmeId,
+        response,
+        username: user.username,
+      },
+    });
+  },
+
   /**
    * This method will call the database and retreive all users.
    * From that, it will filter all users that have at least one answer that needs to be checked.

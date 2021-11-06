@@ -1,7 +1,7 @@
 <template>
   <Page shouldUserBeAuthenticated>
     <div id="administration-page">
-      <EnigmaSection :enigma="{ id: '1', title: 'TITRE DE L\'ENIGME 1' }" />
+      <EnigmaSection v-for="(enigma, id) in answersToCheck" :key="id" :enigma="enigma" />
     </div>
   </Page>
 </template>
@@ -13,6 +13,11 @@
   export default {
     name: 'AdministationView',
     components: { Page, EnigmaSection },
+    computed: {
+      answersToCheck() {
+        return this.$store.state.answersToCheck;
+      },
+    },
     beforeMount() {
       if (this.$store.state.user.role !== 'admin') {
         this.$router.push('/');
