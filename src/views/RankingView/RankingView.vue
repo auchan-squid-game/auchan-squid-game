@@ -2,83 +2,20 @@
   <Page shouldUserBeAuthenticated>
     <div id="ranking-page">
       <div id="top-ranks">
-        <div class="rank-container">
-          <div class="rank-info rank-1">
-            <div class="rank-number">1</div>
-            <div class="username">Francois Crepin</div>
-            <div class="total-points">46 pts</div>
-          </div>
-        </div>
-        <div class="rank-container">
-          <div class="rank-info rank-2">
-            <div class="rank-number">2</div>
-            <div class="username">Thomas Grevedon</div>
-            <div class="total-points">42 pts</div>
-          </div>
-        </div>
-        <div class="rank-container">
-          <div class="rank-info rank-3">
-            <div class="rank-number">3</div>
-            <div class="username">Antoine Deranton</div>
-            <div class="total-points">40 pts</div>
+        <div v-for="(topuser, index) in rankingTopUsers" :key="index" class="rank-container">
+          <div class="rank-info" :class="['rank-info', `rank-${index + 1}`]">
+            <div class="rank-number">{{ index + 1 }}</div>
+            <div class="username">{{ topuser.username }}</div>
+            <div class="total-points">{{ topuser.totalPoints }} pts</div>
           </div>
         </div>
       </div>
       <div id="other-ranks">
-        <div class="rank-container">
+        <div v-for="(user, index) in ranking" :key="index" class="rank-container">
           <div class="rank-info">
-            <div class="rank-number">4</div>
-            <div class="username">Pascal Drieux</div>
-            <div class="total-points">38 pts</div>
-          </div>
-        </div>
-        <div class="rank-container">
-          <div class="rank-info">
-            <div class="rank-number">5</div>
-            <div class="username">Raphael Wawa Debobode</div>
-            <div class="total-points">38 pts</div>
-          </div>
-        </div>
-        <div class="rank-container">
-          <div class="rank-info">
-            <div class="rank-number">6</div>
-            <div class="username">Oussama Rziki</div>
-            <div class="total-points">38 pts</div>
-          </div>
-        </div>
-        <div class="rank-container">
-          <div class="rank-info">
-            <div class="rank-number">7</div>
-            <div class="username">Nesrine Daboussi</div>
-            <div class="total-points">38 pts</div>
-          </div>
-        </div>
-        <div class="rank-container">
-          <div class="rank-info">
-            <div class="rank-number">8</div>
-            <div class="username">Noemie Migliore</div>
-            <div class="total-points">38 pts</div>
-          </div>
-        </div>
-        <div class="rank-container">
-          <div class="rank-info">
-            <div class="rank-number">9</div>
-            <div class="username">Thomas Parsy</div>
-            <div class="total-points">38 pts</div>
-          </div>
-        </div>
-        <div class="rank-container">
-          <div class="rank-info">
-            <div class="rank-number">10</div>
-            <div class="username">Jean Philippe Catel</div>
-            <div class="total-points">38 pts</div>
-          </div>
-        </div>
-        <div class="rank-container">
-          <div class="rank-info">
-            <div class="rank-number">11</div>
-            <div class="username">Rawzi Oum Retem</div>
-            <div class="total-points">38 pts</div>
+            <div class="rank-number">{{ index + 4 }}</div>
+            <div class="username">{{ user.username }}</div>
+            <div class="total-points">{{ user.totalPoints }} pts</div>
           </div>
         </div>
       </div>
@@ -92,6 +29,17 @@
   export default {
     name: 'RankingView',
     components: { Page },
+    computed: {
+      ranking() {
+        return this.$store.state.ranking.slice(3);
+      },
+      rankingTopUsers() {
+        return this.$store.state.ranking.slice(0, 3);
+      },
+    },
+    beforeMount() {
+      this.$store.dispatch('prepareRankingTable');
+    },
   };
 </script>
 
