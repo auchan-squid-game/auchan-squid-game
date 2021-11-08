@@ -1,0 +1,61 @@
+<template>
+  <AuthentificationForm title="Connexion" submitLabel="Se connecter" :submit="signin" :processing="isSigninProcessing">
+    <Input
+      type="text"
+      label="Email"
+      placeholder="Père noël@partner.auchan.fr"
+      size="big"
+      @update="email = $event"
+      :value="email"
+      :error="emailError"
+    />
+    <Input
+      type="password"
+      label="Mot de passe"
+      placeholder="••••••••••••"
+      size="big"
+      @update="password = $event"
+      :value="password"
+      :error="passwordError"
+    />
+  </AuthentificationForm>
+</template>
+
+<script>
+  import { Input } from '@/components';
+
+  import AuthentificationForm from './AuthentificationForm';
+
+  export default {
+    name: 'Login',
+    components: { Input, AuthentificationForm },
+    data() {
+      return {
+        email: '',
+        password: '',
+      };
+    },
+    computed: {
+      emailError() {
+        return this.$store.state.errors.signin.email;
+      },
+      passwordError() {
+        return this.$store.state.errors.signin.password;
+      },
+      isSigninProcessing() {
+        return this.$store.state.app.isSigninProcessing;
+      },
+    },
+
+    methods: {
+      signin() {
+        this.$store.dispatch('signin', {
+          email: this.email,
+          password: this.password,
+        });
+      },
+    },
+  };
+</script>
+
+<style lang="scss" scoped></style>
