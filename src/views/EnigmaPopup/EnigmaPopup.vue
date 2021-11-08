@@ -4,23 +4,49 @@
 
     <div id="popup-enigma" v-if="!!enigma">
       <div id="popup-header">
-        <div id="popup-title"># {{ enigma.id }} - {{ enigma.title }}</div>
+        <div id="popup-title">
+          # {{ enigma.id }} - {{ enigma.title }}
+          <div id="enigma-validation-status">
+            <template v-if="currentUser.answers[enigma.id].isApproved === true">
+              <div class="badge success">APPROVED</div>
+            </template>
+            <template v-else-if="currentUser.answers[enigma.id].isApproved === false">
+              <div class="badge danger">NOT APPROVED</div>
+            </template>
+            <template v-else>
+              <div class="badge warning">PENDING APPROVAL</div>
+            </template>
+          </div>
+        </div>
         <div id="popup-close" @click="closePopup">
           <Icon name="x" />
         </div>
       </div>
+
       <div id="popup-body">
         <div id="enigma-image">
           <img :src="enigma.image" alt="" />
         </div>
-        Votre reponse :
-        <div id="enigma-textarea">
-          <textarea></textarea>
+        <template v-if="canUserEnterResponse">
+          Votre reponse :
+          <div id="enigma-textarea">
+            <textarea v-model="response"></textarea>
+          </div>
+        </template>
+        <template v-else>
+          <div id="enigma-response">
+            Votre reponse : <span>{{ currentUser.answers[enigma.id].response }}</span>
+          </div>
+          <div v-if="expectedReponse" id="enigma-expected-response">
+            Reponse attendue : <span>{{ expectedReponse }}</span>
+          </div>
+        </template>
+      </div>
+      <template v-if="canUserEnterResponse">
+        <div id="popup-actions">
+          <Button label="Valider" color="default" @click="submit" />
         </div>
-      </div>
-      <div id="popup-actions">
-        <Button label="Valider" color="default" @click="submit" />
-      </div>
+      </template>
     </div>
   </div>
 </template>
@@ -31,9 +57,24 @@
   export default {
     name: 'EnigmaPopup',
     components: { Button, Icon },
+    data() {
+      return { response: '' };
+    },
     computed: {
+      currentUser() {
+        return this.$store.state.user;
+      },
       enigma() {
         return this.$store.state.app.enigmaPopup.enigma;
+      },
+      expectedReponse() {
+        return this.$store.state.enigmas.find(e => e.id === this.enigma.id).response;
+      },
+      canUserEnterResponse() {
+        const now = Date.now();
+        const startDate = Date.parse(this.enigma.startDate) + 9 * 60 * 60 * 1000; // Start at 9:00 am
+        const endDate = Date.parse(this.enigma.endDate) + 9 * 60 * 60 * 1000; // Start at 9:00 am
+        return now > startDate && now < endDate;
       },
       show() {
         return this.$store.state.app.enigmaPopup.show;
@@ -44,7 +85,11 @@
         this.$store.dispatch('closeEnigmaPopup');
       },
       submit() {
-        // TODO: Action to submit the response
+        if (this.response !== '') {
+          this.$store.dispatch('submitResponse', this.response);
+          this.closePopup();
+          this.response = '';
+        }
       },
     },
   };
@@ -106,7 +151,34 @@
         border-bottom: 2px solid $color-white-dark;
 
         #popup-title {
+          display: flex;
+          align-items: center;
           flex: 1;
+
+          #enigma-validation-status {
+            margin-left: 30px;
+
+            .badge {
+              padding: 5px 10px 3px;
+              border: 2px solid;
+              font-size: 10px;
+
+              &.success {
+                border-color: rgb(103, 179, 115);
+                color: rgb(61, 107, 69);
+              }
+
+              &.warning {
+                border-color: rgb(249, 181, 63);
+                color: rgb(149, 108, 37);
+              }
+
+              &.danger {
+                border-color: rgb(212, 96, 79);
+                color: rgb(127, 57, 47);
+              }
+            }
+          }
         }
 
         #popup-close {
@@ -125,7 +197,6 @@
         justify-content: center;
         width: 100%;
         padding: 20px;
-        border-bottom: 2px solid $color-white-dark;
 
         #enigma-image {
           display: flex;
@@ -158,6 +229,11 @@
             resize: none;
           }
         }
+
+        #enigma-response span,
+        #enigma-expected-response span {
+          font-family: sans-serif;
+        }
       }
 
       #popup-actions {
@@ -166,6 +242,7 @@
         width: 100%;
         height: 80px;
         padding: 0 20px;
+        border-top: 2px solid $color-white-dark;
 
         :deep(.btn) {
           width: 100%;

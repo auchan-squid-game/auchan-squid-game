@@ -176,6 +176,16 @@ export default {
   },
 
   /**
+   * Submit user response.
+   * @param {String} response - submitted response
+   */
+  submitResponse({ state }, response) {
+    const user = state.user;
+    const enigmeId = state.app.enigmaPopup.enigma.id;
+    userServices.submitResponse(user, enigmeId, response);
+  },
+
+  /**
    * This method will set 5 additional points to the total of points of a user plus will add 1 point to the accumualation field.
    * It will also set the status of the answer to true as it is approved.
    * It will remove also the answer from the anwers to check in the state.

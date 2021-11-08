@@ -52,6 +52,7 @@ export default {
         })
         .map(enigmaToUseToGetTitle => enigmaToUseToGetTitle.title);
       state.answersToCheck[answerId] = {
+        id: answerId,
         title: titleForEnigma[0],
         answers: [userAnswerInfos],
       };
