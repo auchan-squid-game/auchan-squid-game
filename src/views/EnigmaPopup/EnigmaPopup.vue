@@ -71,7 +71,7 @@
         return this.$store.state.enigmas.find(e => e.id === this.enigma.id).response;
       },
       canUserEnterResponse() {
-        if (this.expectedReponse) return true;
+        if (this.expectedReponse) return false;
 
         const now = Date.now();
         const startDate = Date.parse(this.enigma.startDate) + 9 * 60 * 60 * 1000; // Start at 9:00 am

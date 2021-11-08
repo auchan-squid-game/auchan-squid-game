@@ -175,6 +175,10 @@ export default {
     });
   },
 
+  /**
+   * Submit user response.
+   * @param {String} response - submitted response
+   */
   submitResponse({ state }, response) {
     const user = state.user;
     const enigmeId = state.app.enigmaPopup.enigma.id;

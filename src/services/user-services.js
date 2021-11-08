@@ -43,6 +43,13 @@ export default {
     return signInWithEmailAndPassword(getAuth(), email, password);
   },
 
+  /**
+   * Submit user response to database.
+   * @param {Object} user - user which responsed
+   * @param {String} enigmeId - enigma ID
+   * @param {String} response - submitted response
+   * @returns Empty promise.
+   */
   submitResponse(user, enigmeId, response) {
     return update(ref(db, `/users/${user.id}/answers`), {
       [enigmeId]: {
