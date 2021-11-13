@@ -134,7 +134,7 @@
     #popup-enigma {
       display: flex;
       flex-direction: column;
-      width: 800px;
+      width: 1024px;
       border-radius: 20px;
       box-shadow: 0 0 20px $color-background;
       background: #ffffff;
@@ -202,8 +202,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 500px;
-          height: 300px;
+          width: 800px;
+          height: 600px;
           margin-bottom: 20px;
 
           img {
