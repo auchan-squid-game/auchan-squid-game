@@ -1,0 +1,26 @@
+name: 'Build actions'
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: appleboy/scp-action@master
+      - name: 'Deploy indexes'
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          source: 'index.js,dist/index.html'
+          target: ${{ secrets.SERVER_TARGET }}
+      - name: 'Deploy packaged files'
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          source: 'dist/*,dist/**/*'
+          target: ${{ secrets.SERVER_PUBLIC_TARGET }}
