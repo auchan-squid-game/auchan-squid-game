@@ -7,10 +7,10 @@
         <div id="popup-title">
           # {{ enigma.id }} - {{ enigma.title }}
           <div id="enigma-validation-status">
-            <template v-if="currentUser.answers[enigma.id].isApproved === true">
+            <template v-if="currentUser.answers[enigma.id] && currentUser.answers[enigma.id].isApproved === true">
               <div class="badge success">APPROVED</div>
             </template>
-            <template v-else-if="currentUser.answers[enigma.id].isApproved === false">
+            <template v-else-if="currentUser.answers[enigma.id] && currentUser.answers[enigma.id].isApproved === false">
               <div class="badge danger">NOT APPROVED</div>
             </template>
             <template v-else>
@@ -34,7 +34,7 @@
           </div>
         </template>
         <template v-else>
-          <div id="enigma-response">
+          <div v-if="currentUser.answers[enigma.id]" id="enigma-response">
             Votre reponse : <span>{{ currentUser.answers[enigma.id].response }}</span>
           </div>
           <div v-if="expectedReponse" id="enigma-expected-response">
@@ -134,7 +134,7 @@
     #popup-enigma {
       display: flex;
       flex-direction: column;
-      width: 800px;
+      width: 1024px;
       border-radius: 20px;
       box-shadow: 0 0 20px $color-background;
       background: #ffffff;
@@ -202,8 +202,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 500px;
-          height: 300px;
+          width: 800px;
+          height: 600px;
           margin-bottom: 20px;
 
           img {
