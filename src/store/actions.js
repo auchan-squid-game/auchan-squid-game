@@ -221,11 +221,13 @@ export default {
   },
   /**
    * This method will get all users from database and sort them according totalpoints.
+   * It will also remove all admin from the ranking table.
    * From that it sets in the state the username and the totalpoints from each user in an array sorted by descending.
    */
   prepareRankingTable({ commit }) {
     userServices.getAllUsers().then(users => {
       const sortedUsersByTotalPoints = Object.values(users)
+        .filter(user => user.role !== 'admin')
         .sort((userA, userB) => userB.totalPoints - userA.totalPoints)
         .map(user => {
           return { username: user.username, totalPoints: user.totalPoints };

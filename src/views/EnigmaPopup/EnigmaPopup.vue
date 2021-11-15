@@ -7,10 +7,10 @@
         <div id="popup-title">
           # {{ enigma.id }} - {{ enigma.title }}
           <div id="enigma-validation-status">
-            <template v-if="currentUser.answers[enigma.id].isApproved === true">
+            <template v-if="currentUser.answers[enigma.id] && currentUser.answers[enigma.id].isApproved === true">
               <div class="badge success">VALIDEE</div>
             </template>
-            <template v-else-if="currentUser.answers[enigma.id].isApproved === false">
+            <template v-else-if="currentUser.answers[enigma.id] && currentUser.answers[enigma.id].isApproved === false">
               <div class="badge danger">REFUSEE</div>
             </template>
             <template v-else>
@@ -34,7 +34,7 @@
           </div>
         </template>
         <template v-else>
-          <div id="enigma-response">
+          <div v-if="currentUser.answers[enigma.id]" id="enigma-response">
             Votre reponse : <span>{{ currentUser.answers[enigma.id].response }}</span>
           </div>
           <div v-if="expectedReponse" id="enigma-expected-response">
