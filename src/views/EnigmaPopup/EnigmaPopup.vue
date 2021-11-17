@@ -46,7 +46,7 @@
           </div>
         </template>
         <template v-else>
-          <div v-if="currentUser.answers && currentUser.answers[enigma.id]" id="enigma-response">
+          <div v-if="currentUser.answers && currentUser.answers && currentUser.answers[enigma.id]" id="enigma-response">
             Votre reponse : <span>{{ currentUser.answers[enigma.id].response }}</span>
           </div>
           <div v-if="expectedReponse" id="enigma-expected-response">
