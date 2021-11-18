@@ -25,8 +25,11 @@
             >
               <div class="badge danger">REFUSEE</div>
             </template>
-            <template v-else>
+            <template v-else-if="currentUser.answers && currentUser.answers[enigma.id]">
               <div class="badge warning">EN ATTENTE D'APPROBATION</div>
+            </template>
+            <template v-else>
+              <div class="badge danger">NON REPONDU</div>
             </template>
           </div>
         </div>
@@ -225,8 +228,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 800px;
-          height: 600px;
+          width: 80rem;
+          height: 30rem;
           margin-bottom: 20px;
 
           img {
