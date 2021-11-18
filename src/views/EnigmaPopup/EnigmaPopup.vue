@@ -72,8 +72,8 @@
       },
       canUserEnterResponse() {
         const now = Date.now();
-        const startDate = Date.parse(this.enigma.startDate) + 9 * 60 * 60 * 1000; // Start at 9:00 am
-        const endDate = Date.parse(this.enigma.endDate) + 9 * 60 * 60 * 1000; // Start at 9:00 am
+        const startDate = Date.parse(this.enigma.startDate) + 8 * 60 * 60 * 1000; // Start at 9:00 am with gmt+1
+        const endDate = Date.parse(this.enigma.endDate) + 8 * 60 * 60 * 1000; // Start at 9:00 am with gmt+1
         return now > startDate && now < endDate;
       },
       show() {
