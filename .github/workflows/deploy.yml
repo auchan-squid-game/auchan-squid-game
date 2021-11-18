@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@master
+        run: npm build
       - name: 'Deploy indexes'
         uses: appleboy/scp-action@master
         with:
@@ -22,6 +23,7 @@ jobs:
           debug: true
       - name: Check out repository
         uses: actions/checkout@master
+        run: npm build
       - name: 'Deploy packaged files'
         uses: appleboy/scp-action@master
         with:
