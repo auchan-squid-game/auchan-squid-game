@@ -3,6 +3,7 @@
     :class="['calendar-cell-container', { hover: isHovered, enable }]"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
+    @click="showEnigmaPopup"
   >
     <div
       :class="[
@@ -27,7 +28,7 @@
       </div>
     </div>
 
-    <div class="calendar-cell-verso" @click="showEnigmaPopup">
+    <div class="calendar-cell-verso">
       <Button label="VOIR L'ENIGME" color="default" />
     </div>
   </div>
@@ -63,7 +64,7 @@
     },
     methods: {
       showEnigmaPopup() {
-        this.$store.dispatch('showEnigmaPopup', this.enigma);
+        if (this.enable) this.$store.dispatch('showEnigmaPopup', this.enigma);
       },
     },
   };
