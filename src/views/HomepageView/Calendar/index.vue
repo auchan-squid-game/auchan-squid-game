@@ -54,6 +54,20 @@
       width: 100%;
       height: 100%;
 
+      @media screen and (min-width: 850px) and (max-width: 1500px) {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+      }
+
+      @media screen and (max-width: 850px) {
+        display: flex;
+        flex-direction: column;
+
+        &:deep(.calendar-cell-container) {
+          height: 90px;
+        }
+      }
+
       // CENTERED ICON
       #cell-1 {
         :deep(.calendar-cell) {
@@ -96,6 +110,10 @@
       #cell-3 {
         &.calendar-cell-container {
           grid-area: 1 / 8 / 3 / 8;
+
+          @media screen and (max-width: 1500px) {
+            grid-area: 4 / 1 / 4 / 2;
+          }
         }
         :deep(.calendar-cell) {
           background: repeating-linear-gradient(
@@ -157,6 +175,10 @@
       #cell-8 {
         &.calendar-cell-container {
           grid-area: 2 / 9 / 4 / 9;
+
+          @media screen and (max-width: 1500px) {
+            grid-area: 4 / 2 / 4 / 2;
+          }
         }
         :deep(.calendar-cell) {
           background: radial-gradient(
@@ -204,6 +226,10 @@
       #cell-10 {
         &.calendar-cell-container {
           grid-area: 1 / 6 / 1 / 8;
+
+          @media screen and (max-width: 1500px) {
+            grid-area: 4 / 4 / 6 / 6;
+          }
         }
         :deep(.calendar-cell) {
           background: linear-gradient(135deg, $color-christmas-red 25%, transparent 25%) -25px 0,
@@ -217,54 +243,96 @@
       }
 
       // CENTERED ICON
-      #cell-13 :deep(.calendar-cell) {
-        background: $color-christmas-green;
+      #cell-13 {
+        &.calendar-cell-container {
+          @media screen and (max-width: 1500px) {
+            grid-area: 1 / 5 / 3 / 6;
+          }
+        }
+        &:deep(.calendar-cell) {
+          background: $color-christmas-green;
 
-        .icon {
-          color: $color-christmas-yellow;
+          .icon {
+            color: $color-christmas-yellow;
 
-          svg {
-            fill: $color-christmas-yellow;
+            svg {
+              fill: $color-christmas-yellow;
+            }
           }
         }
       }
 
       // ICON
-      #cell-14 :deep(.calendar-cell) {
-        background-color: $color-christmas-yellow;
-        color: $color-background-light;
+      #cell-14 {
+        &.calendar-cell-container {
+          @media screen and (max-width: 1500px) {
+            grid-area: 4 / 3 / 4 / 4;
+          }
+        }
+
+        &:deep(.calendar-cell) {
+          background-color: $color-christmas-yellow;
+          color: $color-background-light;
+        }
       }
 
       // DOTS
-      #cell-15 :deep(.calendar-cell) {
-        background-color: $color-christmas-red;
-        background-image: radial-gradient($color-christmas-yellow-dark 12%, transparent 0),
-          radial-gradient($color-christmas-yellow-dark 12%, transparent 0);
-        background-size: 20px 20px;
-        background-position: 0 0, math.div(20px, 2) math.div(20px, 2);
-        color: $color-white;
+      #cell-15 {
+        &.calendar-cell-container {
+          @media screen and (max-width: 1500px) {
+            grid-area: 5 / 3 / 5 / 4;
+          }
+        }
+
+        &:deep(.calendar-cell) {
+          background-color: $color-christmas-red;
+          background-image: radial-gradient($color-christmas-yellow-dark 12%, transparent 0),
+            radial-gradient($color-christmas-yellow-dark 12%, transparent 0);
+          background-size: 20px 20px;
+          background-position: 0 0, math.div(20px, 2) math.div(20px, 2);
+          color: $color-white;
+        }
       }
 
       // DOTS
-      #cell-16 :deep(.calendar-cell) {
-        background-color: $color-background-light;
-        background-image: radial-gradient($color-background-very-light 12%, transparent 0),
-          radial-gradient($color-background-very-light 12%, transparent 0);
-        background-size: 20px 20px;
-        background-position: 0 0, math.div(20px, 2) math.div(20px, 2);
-        color: $color-white;
+      #cell-16 {
+        &.calendar-cell-container {
+          @media screen and (max-width: 1500px) {
+            grid-area: 3 / 1 / 3 / 2;
+          }
+        }
+
+        &:deep(.calendar-cell) {
+          background-color: $color-background-light;
+          background-image: radial-gradient($color-background-very-light 12%, transparent 0),
+            radial-gradient($color-background-very-light 12%, transparent 0);
+          background-size: 20px 20px;
+          background-position: 0 0, math.div(20px, 2) math.div(20px, 2);
+          color: $color-white;
+        }
       }
 
       // ICON
-      #cell-17 :deep(.calendar-cell) {
-        background-color: $color-background-light;
-        color: $color-white;
+      #cell-17 {
+        &.calendar-cell-container {
+          @media screen and (max-width: 1500px) {
+            grid-area: 2 / 3 / 2 / 4;
+          }
+        }
+        &:deep(.calendar-cell) {
+          background-color: $color-background-light;
+          color: $color-white;
+        }
       }
 
       // ZIGZAG
       #cell-20 {
         &.calendar-cell-container {
           grid-area: 2 / 7 / 4 / 7;
+
+          @media screen and (max-width: 1500px) {
+            grid-area: 5 / 1 / 5 / 2;
+          }
         }
         :deep(.calendar-cell) {
           background: linear-gradient(135deg, $color-christmas-green 25%, transparent 25%) -25px 0,
@@ -281,6 +349,10 @@
       #cell-21 {
         &.calendar-cell-container {
           grid-area: 1 / 2 / 1 / 4;
+
+          @media screen and (max-width: 1500px) {
+            grid-area: 5 / 2 / 5 / 3;
+          }
         }
         :deep(.calendar-cell) {
           background-color: $color-christmas-red;
@@ -302,6 +374,10 @@
       #cell-23 {
         &.calendar-cell-container {
           grid-area: 2 / 5 / 3 / 7;
+
+          @media screen and (max-width: 1500px) {
+            grid-area: 2 / 1 / 2 / 2;
+          }
         }
         :deep(.calendar-cell) {
           position: relative;
@@ -342,6 +418,11 @@
           grid-area: 2 / 2 / 4 / 2;
         }
         :deep(.calendar-cell) {
+          @media screen and (max-width: 850px) {
+            display: flex;
+            flex-direction: row;
+          }
+
           background: linear-gradient(135deg, $color-christmas-red 25%, transparent 25%) -25px 0,
             linear-gradient(225deg, $color-christmas-red 25%, transparent 25%) -25px 0,
             linear-gradient(315deg, $color-christmas-red 25%, transparent 25%),

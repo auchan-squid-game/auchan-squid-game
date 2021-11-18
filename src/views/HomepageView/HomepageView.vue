@@ -89,6 +89,10 @@
       width: 100%;
       padding-top: 50px;
 
+      @media screen and (max-width: 1000px) {
+        flex-direction: column;
+      }
+
       #calendar-title {
         flex: 1;
         color: $color-white;
@@ -102,6 +106,10 @@
         align-items: center;
         color: $color-white;
         font-size: 25px;
+
+        @media screen and (max-width: 600px) {
+          display: none;
+        }
 
         .coutdown-case {
           display: flex;
