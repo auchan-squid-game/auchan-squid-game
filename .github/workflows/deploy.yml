@@ -8,8 +8,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@master
-      - name: build
+      - name: install
         run: npm install
+      - name: build
         run: npm run build
       - name: 'Deploy indexes'
         uses: appleboy/scp-action@master
