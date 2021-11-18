@@ -100,7 +100,7 @@
       isEnigmaEnded() {
         const now = Date.now();
         const endDate = Date.parse(this.enigma.endDate) + 8 * 60 * 60 * 1000; // Start at 9:00 am with GMT+1
-        return now >= endDate;
+        return now > endDate;
       },
       show() {
         return this.$store.state.app.enigmaPopup.show;
