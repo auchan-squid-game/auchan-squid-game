@@ -8,13 +8,13 @@
           # {{ enigma.id }} - {{ enigma.title }}
           <div id="enigma-validation-status">
             <template v-if="currentUser.answers[enigma.id] && currentUser.answers[enigma.id].isApproved === true">
-              <div class="badge success">APPROVED</div>
+              <div class="badge success">VALIDEE</div>
             </template>
             <template v-else-if="currentUser.answers[enigma.id] && currentUser.answers[enigma.id].isApproved === false">
-              <div class="badge danger">NOT APPROVED</div>
+              <div class="badge danger">REFUSEE</div>
             </template>
             <template v-else>
-              <div class="badge warning">PENDING APPROVAL</div>
+              <div class="badge warning">EN ATTENTE D'APPROBATION</div>
             </template>
           </div>
         </div>
