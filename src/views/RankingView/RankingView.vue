@@ -55,6 +55,10 @@
     #top-ranks {
       display: flex;
 
+      @media screen and (max-width: 1300px) {
+        flex-direction: column;
+      }
+
       .rank-container {
         flex: 1;
 
@@ -107,8 +111,20 @@
       display: flex;
       flex-wrap: wrap;
 
+      @media screen and (max-width: 1300px) {
+        flex-direction: column;
+      }
+
       .rank-container {
         width: 25%;
+
+        @media screen and (min-width: 1300px) and (max-width: 1500px) {
+          width: 33%;
+        }
+
+        @media screen and (max-width: 1300px) {
+          width: 100%;
+        }
       }
     }
 
