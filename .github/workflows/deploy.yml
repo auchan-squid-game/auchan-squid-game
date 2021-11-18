@@ -10,10 +10,10 @@ jobs:
         uses: actions/checkout@master
       - name: install
         uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-            cache: 'npm'
-            cache-dependency-path: subdir/package-lock.json
+        with:
+          node-version: '14'
+          cache: 'npm'
+          cache-dependency-path: subdir/package-lock.json
         run: npm install
       - name: build
         run: npm run build
