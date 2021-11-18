@@ -7,14 +7,29 @@
         <div id="popup-title">
           # {{ enigma.id }} - {{ enigma.title }}
           <div id="enigma-validation-status">
-            <template v-if="currentUser.answers[enigma.id] && currentUser.answers[enigma.id].isApproved === true">
-              <div class="badge success">APPROVED</div>
+            <template
+              v-if="
+                currentUser.answers &&
+                currentUser.answers[enigma.id] &&
+                currentUser.answers[enigma.id].isApproved === true
+              "
+            >
+              <div class="badge success">VALIDEE</div>
             </template>
-            <template v-else-if="currentUser.answers[enigma.id] && currentUser.answers[enigma.id].isApproved === false">
-              <div class="badge danger">NOT APPROVED</div>
+            <template
+              v-else-if="
+                currentUser.answers &&
+                currentUser.answers[enigma.id] &&
+                currentUser.answers[enigma.id].isApproved === false
+              "
+            >
+              <div class="badge danger">REFUSEE</div>
+            </template>
+            <template v-else-if="currentUser.answers && currentUser.answers[enigma.id]">
+              <div class="badge warning">EN ATTENTE D'APPROBATION</div>
             </template>
             <template v-else>
-              <div class="badge warning">PENDING APPROVAL</div>
+              <div class="badge danger">NON REPONDU</div>
             </template>
           </div>
         </div>
@@ -34,10 +49,10 @@
           </div>
         </template>
         <template v-else>
-          <div v-if="currentUser.answers[enigma.id]" id="enigma-response">
+          <div v-if="currentUser.answers && currentUser.answers && currentUser.answers[enigma.id]" id="enigma-response">
             Votre reponse : <span>{{ currentUser.answers[enigma.id].response }}</span>
           </div>
-          <div v-if="expectedReponse" id="enigma-expected-response">
+          <div v-if="isEnigmaEnded && expectedReponse" id="enigma-expected-response">
             Reponse attendue : <span>{{ expectedReponse }}</span>
           </div>
         </template>
@@ -72,9 +87,20 @@
       },
       canUserEnterResponse() {
         const now = Date.now();
-        const startDate = Date.parse(this.enigma.startDate) + 9 * 60 * 60 * 1000; // Start at 9:00 am
-        const endDate = Date.parse(this.enigma.endDate) + 9 * 60 * 60 * 1000; // Start at 9:00 am
-        return now > startDate && now < endDate;
+        const startDate = Date.parse(this.enigma.startDate) + 8 * 60 * 60 * 1000; // Start at 9:00 am with gmt+1
+        const endDate = Date.parse(this.enigma.endDate) + 8 * 60 * 60 * 1000; // Start at 9:00 am with gmt+1
+        const currentUser = this.$store.state.user;
+        const enigma = this.$store.state.app.enigmaPopup.enigma;
+        return (
+          now > startDate &&
+          now < endDate &&
+          (!currentUser.answers || !currentUser.answers[enigma.id] || !currentUser.answers[enigma.id].response)
+        );
+      },
+      isEnigmaEnded() {
+        const now = Date.now();
+        const endDate = Date.parse(this.enigma.endDate) + 8 * 60 * 60 * 1000; // Start at 9:00 am with GMT+1
+        return now > endDate;
       },
       show() {
         return this.$store.state.app.enigmaPopup.show;
@@ -182,8 +208,8 @@
         }
 
         #popup-close {
-          width: 80px;
-          height: 80px;
+          width: 40px;
+          height: 40px;
           padding: 10px;
           cursor: pointer;
         }
@@ -202,8 +228,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 800px;
-          height: 600px;
+          width: 80rem;
+          height: 30rem;
           margin-bottom: 20px;
 
           img {
