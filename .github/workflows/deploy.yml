@@ -8,12 +8,13 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@master
-      - name: install
+      - name: set node
         uses: actions/setup-node@v2
         with:
           node-version: '14'
           cache: 'npm'
           cache-dependency-path: subdir/package-lock.json
+      - name: install
         run: npm install
       - name: build
         run: npm run build
