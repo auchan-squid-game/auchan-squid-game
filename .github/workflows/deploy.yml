@@ -25,6 +25,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
+          key: ${{ secrets.KEY_SSH }}
           port: ${{ secrets.SERVER_PORT }}
           source: 'dist/*,dist/**/*'
           target: ${{ secrets.SERVER_PUBLIC_TARGET }}
