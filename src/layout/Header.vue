@@ -58,6 +58,12 @@
 <style lang="scss" scoped>
   @import '@/assets/scss/_colors.scss';
 
+  @media screen and (max-width: 650px) {
+    #header #logo {
+      display: hidden;
+    }
+  }
+
   #header {
     display: flex;
     width: 100%;
@@ -70,6 +76,10 @@
       align-items: center;
       color: $color-christmas-red;
       font-size: 30px;
+
+      @media screen and (max-width: 660px) {
+        display: none;
+      }
     }
 
     #header-menu {
