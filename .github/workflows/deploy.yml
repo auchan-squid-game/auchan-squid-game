@@ -18,6 +18,7 @@ jobs:
           source: './index.js,./dist/index.html'
           target: ${{ secrets.SERVER_TARGET }}
           use_insecure_cipher: true
+          debug: true
       - name: Check out repository
         uses: actions/checkout@master
       - name: 'Deploy packaged files'
@@ -30,3 +31,4 @@ jobs:
           source: './dist/*,./dist/**/*'
           target: ${{ secrets.SERVER_PUBLIC_TARGET }}
           use_insecure_cipher: true
+          debug: true
