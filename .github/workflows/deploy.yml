@@ -9,7 +9,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@master
       - name: build
-        run: npm build
+        run: npm run build
       - name: 'Deploy indexes'
         uses: appleboy/scp-action@master
         with:
