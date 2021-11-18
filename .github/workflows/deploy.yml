@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -15,7 +15,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          source: 'index.js,dist/index.html'
+          source: './index.js,./dist/index.html'
           target: ${{ secrets.SERVER_TARGET }}
           use_insecure_cipher: true
       - name: Check out repository
@@ -27,6 +27,6 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          source: 'dist/*,dist/**/*'
+          source: './dist/*,./dist/**/*'
           target: ${{ secrets.SERVER_PUBLIC_TARGET }}
           use_insecure_cipher: true
