@@ -18,7 +18,6 @@ jobs:
           source: '/home/runner/work/auchan-squid-game/auchan-squid-game/index.js,/home/runner/work/auchan-squid-game/auchan-squid-game/dist/index.html'
           target: ${{ secrets.SERVER_TARGET }}
           use_insecure_cipher: true
-          debug: true
       - name: Check out repository
         uses: actions/checkout@master
       - name: 'Deploy packaged files'
@@ -28,7 +27,6 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          source: '/home/runner/work/auchan-squid-game/auchan-squid-game/dist/*,/home/runner/work/auchan-squid-game/auchan-squid-game/dist/**/*'
+          source: '/home/runner/work/auchan-squid-game/auchan-squid-game/dist/'
           target: ${{ secrets.SERVER_PUBLIC_TARGET }}
           use_insecure_cipher: true
-          debug: true
