@@ -14,7 +14,7 @@
                 currentUser.answers[enigma.id].isApproved === true
               "
             >
-              <div class="badge success">APPROVED</div>
+              <div class="badge success">VALIDEE</div>
             </template>
             <template
               v-else-if="
@@ -23,10 +23,10 @@
                 currentUser.answers[enigma.id].isApproved === false
               "
             >
-              <div class="badge danger">NOT APPROVED</div>
+              <div class="badge danger">REFUSEE</div>
             </template>
             <template v-else>
-              <div class="badge warning">PENDING APPROVAL</div>
+              <div class="badge warning">EN ATTENTE D'APPROBATION</div>
             </template>
           </div>
         </div>
@@ -84,8 +84,8 @@
       },
       canUserEnterResponse() {
         const now = Date.now();
-        const startDate = Date.parse(this.enigma.startDate) + 9 * 60 * 60 * 1000; // Start at 9:00 am
-        const endDate = Date.parse(this.enigma.endDate) + 9 * 60 * 60 * 1000; // Start at 9:00 am
+        const startDate = Date.parse(this.enigma.startDate) + 8 * 60 * 60 * 1000; // Start at 9:00 am with gmt+1
+        const endDate = Date.parse(this.enigma.endDate) + 8 * 60 * 60 * 1000; // Start at 9:00 am with gmt+1
         return now > startDate && now < endDate;
       },
       show() {
