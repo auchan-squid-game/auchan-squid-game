@@ -13,7 +13,7 @@ jobs:
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.KEY_SSH }}
+          password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           source: 'index.js,dist/index.html'
           target: ${{ secrets.SERVER_TARGET }}
@@ -25,7 +25,7 @@ jobs:
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.KEY_SSH }}
+          password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           source: 'dist/*,dist/**/*'
           target: ${{ secrets.SERVER_PUBLIC_TARGET }}
