@@ -65,4 +65,11 @@ export default {
   [types.SET_RANKING](state, sortedArray) {
     state.ranking = sortedArray;
   },
+  [types.SET_ANSWER](state, { enigmeId: enigmeId, response: response }) {
+    if (state.user.answers) {
+      state.user.answers[enigmeId] = { id: enigmeId, response: response };
+    } else {
+      state.user['answers'] = { [enigmeId]: { id: enigmeId, response: response } };
+    }
+  },
 };
