@@ -5,11 +5,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Check out repository
         uses: actions/checkout@master
-      - run: npm build
+      - name: build
+        run: npm build
       - name: 'Deploy indexes'
         uses: appleboy/scp-action@master
         with:
@@ -21,9 +21,6 @@ jobs:
           target: ${{ secrets.SERVER_TARGET }}
           use_insecure_cipher: true
           debug: true
-      - name: Check out repository
-        uses: actions/checkout@master
-      - run: npm build
       - name: 'Deploy packaged files'
         uses: appleboy/scp-action@master
         with:
