@@ -205,8 +205,8 @@
         }
 
         #popup-close {
-          width: 80px;
-          height: 80px;
+          width: 40px;
+          height: 40px;
           padding: 10px;
           cursor: pointer;
         }
