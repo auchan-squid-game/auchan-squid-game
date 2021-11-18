@@ -58,18 +58,17 @@
 <style lang="scss" scoped>
   @import '@/assets/scss/_colors.scss';
 
-  @media screen and (max-width: 650px) {
-    #header #logo {
-      display: hidden;
-    }
-  }
-
   #header {
     display: flex;
     width: 100%;
-    height: 120px;
+    min-height: 120px;
     padding: 0 50px;
     z-index: 100;
+
+    @media screen and (max-width: 660px) {
+      flex-direction: column;
+      align-items: center;
+    }
 
     #logo {
       display: flex;
@@ -77,7 +76,7 @@
       color: $color-christmas-red;
       font-size: 30px;
 
-      @media screen and (max-width: 660px) {
+      @media screen and (max-width: 900px) {
         display: none;
       }
     }
@@ -113,6 +112,10 @@
               height: 5px;
               border-radius: 50%;
               background: $color-christmas-red;
+
+              @media screen and (max-width: 660px) {
+                top: 55px;
+              }
             }
           }
         }
