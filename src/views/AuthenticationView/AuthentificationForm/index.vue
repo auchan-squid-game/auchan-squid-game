@@ -31,6 +31,7 @@
 
   .auth-form {
     width: 400px;
+    padding: 30px 10px;
 
     .title {
       padding-bottom: 30px;

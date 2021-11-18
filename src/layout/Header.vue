@@ -61,15 +61,24 @@
   #header {
     display: flex;
     width: 100%;
-    height: 120px;
+    min-height: 120px;
     padding: 0 50px;
     z-index: 100;
+
+    @media screen and (max-width: 660px) {
+      flex-direction: column;
+      align-items: center;
+    }
 
     #logo {
       display: flex;
       align-items: center;
       color: $color-christmas-red;
       font-size: 30px;
+
+      @media screen and (max-width: 900px) {
+        display: none;
+      }
     }
 
     #header-menu {
@@ -103,6 +112,10 @@
               height: 5px;
               border-radius: 50%;
               background: $color-christmas-red;
+
+              @media screen and (max-width: 660px) {
+                top: 55px;
+              }
             }
           }
         }
