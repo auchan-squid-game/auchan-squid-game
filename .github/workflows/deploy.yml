@@ -3,22 +3,22 @@ on:
   push:
     branches: [main]
 jobs:
+  build:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        node-version: [12, 14]
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Install node.js dependencies'
+        run: npm install
+      - name: 'Build'
+        run: npm run build
+      - name: 'Lint'
+        run: npm run lint
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@master
-      - name: set node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          cache: 'npm'
-      - name: install
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
-      - name: build
-        run: npm run build
       - name: ls files
         run: ls -R ./
       - name: 'Deploy indexes'
