@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          source: './index.js,./dist/**/*'
+          source: './index.js,./dist/index.html,./dist/*'
           target: ${{ secrets.SERVER_TARGET }}
           use_insecure_cipher: true
           debug: true
