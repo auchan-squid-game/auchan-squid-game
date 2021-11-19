@@ -19,6 +19,8 @@ jobs:
           useLockFile: false
       - name: build
         run: npm run build
+      - name: ls files
+        run: ls -R ./
       - name: 'Deploy indexes'
         uses: appleboy/scp-action@master
         with:
