@@ -179,10 +179,11 @@ export default {
    * Submit user response.
    * @param {String} response - submitted response
    */
-  submitResponse({ state }, response) {
+  submitResponse({ state, commit }, response) {
     const user = state.user;
     const enigmeId = state.app.enigmaPopup.enigma.id;
     userServices.submitResponse(user, enigmeId, response);
+    commit(types.SET_ANSWER, { enigmeId: enigmeId, response: response });
   },
 
   /**

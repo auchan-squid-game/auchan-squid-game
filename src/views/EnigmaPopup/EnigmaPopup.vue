@@ -108,6 +108,7 @@
     },
     methods: {
       closePopup() {
+        this.response = '';
         this.$store.dispatch('closeEnigmaPopup');
       },
       submit() {
