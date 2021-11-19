@@ -16,8 +16,6 @@ jobs:
         run: npm run build
       - name: 'Lint'
         run: npm run lint
-      - name: ls files
-        run: ls -R ./
       - name: 'Deploy indexes'
         uses: appleboy/scp-action@master
         with:
