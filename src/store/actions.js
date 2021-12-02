@@ -230,9 +230,7 @@ export default {
       const sortedUsersByTotalPoints = Object.values(users)
         .filter(user => user.role !== 'admin')
         .sort((userA, userB) => userB.totalPoints - userA.totalPoints)
-        .map(user => {
-          return { username: user.username, totalPoints: user.totalPoints };
-        });
+        .map(user => ({ username: user.username, totalPoints: user.totalPoints, answers: user.answers }));
       commit(types.SET_RANKING, sortedUsersByTotalPoints);
     });
   },
