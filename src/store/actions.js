@@ -235,7 +235,7 @@ export default {
       const sortedUsersByTotalPoints = sortedUsers.map((user, i) => {
         if (i > 0) {
           const previousUser = sortedUsers[i - 1];
-          if (previousUser.totalPoints !== user.totalPoints) rank++;
+          if (previousUser.totalPoints !== user.totalPoints) rank = i + 1;
         }
 
         return { username: user.username, totalPoints: user.totalPoints, answers: user.answers, rank };

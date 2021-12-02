@@ -50,7 +50,7 @@
         grid-template-columns: repeat(1, minmax(0, 1fr));
       }
 
-      :deep(.rank-container) &:first-child {
+      :deep(.rank-container):first-child {
         grid-column-start: 1;
         grid-column-end: -1;
 
