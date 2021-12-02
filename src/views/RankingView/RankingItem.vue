@@ -1,7 +1,7 @@
 <template>
   <div class="rank-container">
-    <div :class="['rank-info', `rank-${index + 1}`]">
-      <div class="rank-number">{{ index + 1 }}</div>
+    <div :class="['rank-info', `rank-${user.rank}`]">
+      <div class="rank-number">{{ user.rank }}</div>
       <div class="user-data">
         <div class="username">{{ user.username }}</div>
         <div class="answers">
@@ -26,7 +26,6 @@
       return { enigmas };
     },
     props: {
-      index: { type: Number, required: true },
       user: { type: Object, required: true },
     },
     methods: {
