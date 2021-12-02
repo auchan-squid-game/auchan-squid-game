@@ -227,12 +227,19 @@ export default {
    */
   prepareRankingTable({ commit }) {
     userServices.getAllUsers().then(users => {
-      const sortedUsersByTotalPoints = Object.values(users)
+      const sortedUsers = Object.values(users)
         .filter(user => user.role !== 'admin')
-        .sort((userA, userB) => userB.totalPoints - userA.totalPoints)
-        .map(user => {
-          return { username: user.username, totalPoints: user.totalPoints };
-        });
+        .sort((userA, userB) => userB.totalPoints - userA.totalPoints);
+
+      let rank = 1;
+      const sortedUsersByTotalPoints = sortedUsers.map((user, i) => {
+        if (i > 0) {
+          const previousUser = sortedUsers[i - 1];
+          if (previousUser.totalPoints !== user.totalPoints) rank++;
+        }
+
+        return { username: user.username, totalPoints: user.totalPoints, answers: user.answers, rank };
+      });
       commit(types.SET_RANKING, sortedUsersByTotalPoints);
     });
   },

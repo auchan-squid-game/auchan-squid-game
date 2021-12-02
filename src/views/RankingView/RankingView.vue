@@ -2,22 +2,10 @@
   <Page shouldUserBeAuthenticated>
     <div id="ranking-page">
       <div id="top-ranks">
-        <div v-for="(topuser, index) in rankingTopUsers" :key="index" class="rank-container">
-          <div class="rank-info" :class="['rank-info', `rank-${index + 1}`]">
-            <div class="rank-number">{{ index + 1 }}</div>
-            <div class="username">{{ topuser.username }}</div>
-            <div class="total-points">{{ topuser.totalPoints }} pts</div>
-          </div>
-        </div>
+        <RankingItem v-for="(topuser, index) in rankingTopUsers" :key="index" :user="topuser" />
       </div>
       <div id="other-ranks">
-        <div v-for="(user, index) in ranking" :key="index" class="rank-container">
-          <div class="rank-info">
-            <div class="rank-number">{{ index + 4 }}</div>
-            <div class="username">{{ user.username }}</div>
-            <div class="total-points">{{ user.totalPoints }} pts</div>
-          </div>
-        </div>
+        <RankingItem v-for="(user, index) in ranking" :key="index" :user="user" />
       </div>
     </div>
   </Page>
@@ -26,9 +14,11 @@
 <script>
   import Page from '@/layout/Page';
 
+  import RankingItem from './RankingItem';
+
   export default {
     name: 'RankingView',
-    components: { Page },
+    components: { Page, RankingItem },
     computed: {
       ranking() {
         return this.$store.state.ranking.slice(3);
@@ -53,14 +43,16 @@
     overflow-y: auto;
 
     #top-ranks {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
 
       @media screen and (max-width: 1300px) {
-        flex-direction: column;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
       }
 
-      .rank-container {
-        flex: 1;
+      :deep(.rank-container) &:first-child {
+        grid-column-start: 1;
+        grid-column-end: -1;
 
         .rank-info {
           position: relative;
@@ -79,65 +71,55 @@
               url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAXCAYAAACFxybfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAodJREFUeNrsVb1rWlEUv2pN/GqspKRSKFYXWzEloIWif0Fn6dJChQ7OQil0qd3EzcEpg0OgdHDr4CQODk7VRlLMEIVqApX4We0zflR9/Z1Ui4T34ksaaAYP/Hzc673n/M6550PG8zz73yKjn0wm83fDYDAwo9HINBrNnwOQg4MDs0ql2lQqlfdAWont7ng8Pjw+Ps44nc4G1pI9EXWaSOzt7TGO42aH5Pv7+08ajUZ0MBiUeXEZd7vdL5VK5fX29rZ+5tQiEmdxKrlcjsEYczgcynK5/BKKv/IXFNz/XiqVXkHdjUuRIA9SqdRD8or/R8Ez9fr9fqHVakUR4c2z0REjIQuHw2ZcrPBXLCA0RHTezEdHjIQqkUhEr9I4HOILhQLf6/VoOUFEvDMiQiToDx1Cdz+bzZ6bUFarlel0OkkVUK/XWbvdPoVer5fh3ntsfwJ+CJ2XA4p0Op1bpBgJyxDehQQ6nQ5DZXHBYDBZq9V+EhFUndnr9drEqoc2bwJbwGPgtohuVSwWe2Gz2TZMJpNgRKi6qtUqg2EWj8dTgUDgo0KhWPN4PC70EvXOzs67fD6/S6kiRIKeZA1YJ2MiJNbdbvfTUCjkV6vVK2hcDF8GI2w0GrGTkxM2HA5PDxaLxSOfz/cWEfk81X0XIMMFgJJ/srBjCgk8IdcfuVyuZ36//7nFYtkQyAMumUzuRiKRD0jMFLa+AZOpYwqgB/ziBVqmVBKUO7eAB/R0WG/Z7XaTVqtdbTabHJL6EK2djBaBPHA0NSqpbUsiMUeEBgpF4Q5AbZrmSJ/yEWgBTaBNHl9kdkgmMUeG7qwAq9PqovceTA3zlxlgsuswyuXsGsiSxJLEkoSY/BZgAEjRodi+uBruAAAAAElFTkSuQmCC)
                 no-repeat 100% 0;
           }
+        }
+      }
+    }
 
-          &.rank-1 .rank-number {
+    :deep(#other-ranks) {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      @media screen and (max-width: 1300px) {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+    }
+
+    :deep(.rank-container) {
+      padding: 10px 30px;
+
+      .rank-info {
+        display: flex;
+        width: 100%;
+        min-height: 80px;
+        border-radius: 10px;
+        background: $color-background-light;
+        color: $color-white;
+
+        &.rank-1 {
+          .rank-number {
             color: $color-gold;
 
             &::after {
               border-color: $color-gold;
             }
           }
+        }
 
-          &.rank-2 .rank-number {
-            color: $color-silver;
+        &.rank-2 .rank-number {
+          color: $color-silver;
 
-            &::after {
-              border-color: $color-silver;
-            }
-          }
-
-          &.rank-3 .rank-number {
-            color: $color-bronze;
-
-            &::after {
-              border-color: $color-bronze;
-            }
+          &::after {
+            border-color: $color-silver;
           }
         }
-      }
-    }
 
-    #other-ranks {
-      display: flex;
-      flex-wrap: wrap;
+        &.rank-3 .rank-number {
+          color: $color-bronze;
 
-      @media screen and (max-width: 1300px) {
-        flex-direction: column;
-      }
-
-      .rank-container {
-        width: 25%;
-
-        @media screen and (min-width: 1300px) and (max-width: 1500px) {
-          width: 33%;
+          &::after {
+            border-color: $color-bronze;
+          }
         }
-
-        @media screen and (max-width: 1300px) {
-          width: 100%;
-        }
-      }
-    }
-
-    .rank-container {
-      padding: 10px 30px;
-
-      .rank-info {
-        display: flex;
-        width: 100%;
-        height: 80px;
-        border-radius: 10px;
-        background: $color-background-light;
-        color: $color-white;
 
         .rank-number {
           position: relative;
@@ -145,11 +127,12 @@
           align-items: center;
           justify-content: center;
           width: 80px;
-          height: 100%;
+          min-height: 80px;
           padding-top: 6px;
           padding-right: 1px;
           border-right: 2px solid $color-background;
-          font-size: 25px;
+          font-family: 'Christmas';
+          font-size: 30px;
 
           &::after {
             content: '';
@@ -164,14 +147,51 @@
           }
         }
 
-        .username {
-          display: flex;
+        .user-data {
           flex: 1;
-          align-items: center;
-          justify-content: flex-start;
-          height: 100%;
-          padding: 0 20px;
-          font-size: 17px;
+          min-height: 80px;
+
+          .username {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 30px 20px 10px;
+            font-size: 17px;
+          }
+
+          .answers {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 20px 15px;
+
+            .answer {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 20px;
+              height: 20px;
+              margin-right: 5px;
+              margin-bottom: 5px;
+              padding-top: 2px;
+              padding-right: 1px;
+              border-radius: 50px;
+              color: $color-background;
+              font-size: 13px;
+
+              &.approved {
+                background: #70996c;
+              }
+              &.not-approved {
+                background: $color-christmas-red;
+              }
+              &.waiting-approval {
+                background: #d8be67;
+              }
+              &.not-answered {
+                background: $color-white-dark;
+              }
+            }
+          }
         }
 
         .total-points {
@@ -179,7 +199,7 @@
           align-items: center;
           justify-content: center;
           min-width: 80px;
-          height: 100%;
+          min-height: 80px;
           padding: 0 10px;
           font-size: 17px;
         }
