@@ -42,9 +42,14 @@
     padding: 50px;
     overflow-y: auto;
 
+    & > div {
+      gap: 15px;
+    }
+
     #top-ranks {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 15px;
 
       @media screen and (max-width: 1300px) {
         grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -85,8 +90,6 @@
     }
 
     :deep(.rank-container) {
-      padding: 10px 30px;
-
       .rank-info {
         display: flex;
         width: 100%;
