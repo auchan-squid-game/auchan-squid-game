@@ -239,7 +239,9 @@ export default {
           if (previousUser.totalPoints !== user.totalPoints) rank = i + 1;
         }
 
-        return { username: user.username, totalPoints: user.totalPoints, answers: user.answers, rank };
+        const answers = user.answers && !Array.isArray(user.answers) ? Object.values(user.answers) : user.answers;
+
+        return { username: user.username, totalPoints: user.totalPoints, answers, rank };
       });
       commit(types.SET_RANKING, sortedUsersByTotalPoints);
     });
