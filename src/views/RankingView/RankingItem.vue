@@ -39,12 +39,18 @@
         return Number(this.getEnigmaStartDay(id)) <= new Date().getDate();
       },
       getAnswerStatus(id) {
-        if (!this.user.answers) return 'not-answered';
+        const enigma = this.getEnigmaById(id);
+        const isEnigmaEnded = new Date(enigma.endDate) < Date.now();
+
+        if (!this.user.answers && isEnigmaEnded) return 'not-answered';
+        if (!this.user.answers && !isEnigmaEnded) return 'waiting-response';
 
         const answer = this.user.answers.find(a => a && a.id === id);
-        if (!answer) return 'not-answered';
+        if (!answer && isEnigmaEnded) return 'not-answered';
+        if (!answer && !isEnigmaEnded) return 'waiting-response';
         if (answer.isApproved === true) return 'approved';
         if (answer.isApproved === false) return 'not-approved';
+
         return 'waiting-approval';
       },
     },

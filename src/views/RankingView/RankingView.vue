@@ -187,11 +187,14 @@
               &.not-approved {
                 background: $color-christmas-red;
               }
+              &.waiting-response {
+                background: $color-white-dark;
+              }
               &.waiting-approval {
                 background: #d8be67;
               }
               &.not-answered {
-                background: $color-white-dark;
+                background: $color-background-very-light;
               }
             }
           }

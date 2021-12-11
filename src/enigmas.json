@@ -33,7 +33,7 @@
   },
   {
     "id": "5",
-    "title": "cNe soyez pas négatif !",
+    "title": "Ne soyez pas négatif !",
     "image": "https://firebasestorage.googleapis.com/v0/b/auchansquidgame.appspot.com/o/enigmes%2Fnegatif.png?alt=media&token=d8555635-68f3-4af5-96dc-8cdf6c635690",
     "startDate": "2021-12-07",
     "endDate": "2021-12-09",
@@ -49,7 +49,7 @@
   },
   {
     "id": "7",
-    "title": "la mécanique...",
+    "title": "La mécanique...",
     "image": "https://firebasestorage.googleapis.com/v0/b/auchansquidgame.appspot.com/o/enigmes%2Fbloc.png?alt=media&token=0661b14e-bd03-4f02-9923-1e8fea24a077",
     "startDate": "2021-12-09",
     "endDate": "2021-12-12",
