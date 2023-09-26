@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <div id="logo">Auchan Squid Game</div>
+    <div id="logo">Suspens Actions et Péripéties</div>
     <div id="header-menu">
       <template v-if="!!currentUser">
         <router-link to="/">

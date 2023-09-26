@@ -1,3 +1,3 @@
-# Auchan Squid Game
+# Suspens Actions et Péripéties
 
-🎄 Auchan Advent Calendar built with Vue.js and Vuex
+🎄 SAP Advent Calendar built with Vue.js and Vuex
